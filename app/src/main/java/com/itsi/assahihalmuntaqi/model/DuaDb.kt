@@ -1,37 +1,48 @@
 package com.itsi.assahihalmuntaqi.model
 
-import android.content.Context
 import android.util.Log
-import com.itsi.assahihalmuntaqi.R
 import org.json.JSONArray
-import org.json.JSONTokener
-import kotlinx.serialization.*
-import kotlinx.serialization.json.Json
-import org.json.JSONObject
 
 class DuaDb {
-    //val usersArray
-    val jsonBook = ""
-    fun fetchJsonData(context: Context): String {
-        val strjson = context.getString(R.string.jsonData)
-        return strjson;
-    }
 
-    fun getChapterNames(): ArrayList<String> {
+    fun getChapterEvd(): ArrayList<ChapterEvidence> {
         //val strjson = fetchJsonData(context)
-        val chNamesList:ArrayList<String> = ArrayList<String>();
+        val chNamesList:ArrayList<String> = ArrayList<String>()
+        val chEvdList:ArrayList<ChapterEvidence> = ArrayList<ChapterEvidence>()
         //Decode from string
         //val employeeObject = Json.decodeFromString<String>(strjson);
         //println(employeeObject);
 
-            val bookJsonArray = JSONArray(DuaData.hardcodedJsonDataAsString)
+        val bookJsonArray = JSONArray(DuaData.hardcodedJsonDataAsString)
         Log.i("JSON", bookJsonArray.toString())
         //val jsonArray = JSONTokener(strjson).nextValue() as JSONArray
         for (i in 0 until bookJsonArray.length()) {
-            val chName = bookJsonArray.getJSONObject(i).getString("ch_name")
-            Log.i("ID: ", chName)
-            chNamesList.add(chName)
+            val oneChObj = bookJsonArray.getJSONObject(i)
+            val oneChEvd = ChapterEvidence(oneChObj.getInt("ch_id"), oneChObj.getString("ch_name"),
+                                oneChObj.getString("ch_evidence"))
+            chEvdList.add(oneChEvd)
         }
-        return chNamesList
+        return chEvdList
+    }
+
+    /**
+     * Returns the list of duas with the respective ids and evidence for a particular chapter
+     **/
+    fun getDuaEvidenceList(chPos:Int): ArrayList<DuaEvidence> {
+        val bookJsonArray = JSONArray(DuaData.hardcodedJsonDataAsString)
+        val chName = bookJsonArray.getJSONObject(chPos).getString("ch_name")
+        val oneChObject = bookJsonArray.getJSONObject(chPos)
+        val duaArray = oneChObject.getJSONArray("duas")
+        var duaEvidenceList = ArrayList<DuaEvidence>()
+
+        for (i in 0 until duaArray.length()) {
+            val oneDuaObj = duaArray.getJSONObject(i)
+            Log.i("ID: ", oneDuaObj.toString())
+            var duaEvidence = DuaEvidence(oneDuaObj.getInt("id"), oneDuaObj.getString("dua"),
+                                oneDuaObj.getString("evidence"))
+            duaEvidenceList.add(duaEvidence)
+            //chNamesList.add(chName)
+        }
+        return duaEvidenceList
     }
 }

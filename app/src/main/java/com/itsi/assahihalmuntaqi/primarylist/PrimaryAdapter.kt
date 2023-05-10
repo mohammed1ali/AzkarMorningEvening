@@ -2,14 +2,14 @@ package com.itsi.assahihalmuntaqi.primarylist
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.itsi.assahihalmuntaqi.R
+import com.itsi.assahihalmuntaqi.model.ChapterEvidence
 
-class PrimaryAdapter(private val mList: ArrayList<String>) : RecyclerView.Adapter<PrimaryAdapter.ViewHolder>() {
+class PrimaryAdapter(private val mChEvdList: ArrayList<ChapterEvidence>) : RecyclerView.Adapter<PrimaryAdapter.ViewHolder>() {
 
-    private var onClickListener: View.OnClickListener? = null
+    private var onClickListener: OnClickListener? = null
 
     // create new views
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -24,24 +24,32 @@ class PrimaryAdapter(private val mList: ArrayList<String>) : RecyclerView.Adapte
     // binds the list items to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val chName = mList[position]
+        val oneChEvd = mChEvdList[position]
+        holder.textView.text = oneChEvd.mChapterName
+        holder.itemView.setOnClickListener {
+            if (onClickListener != null) {
+                onClickListener!!.onClick(position, oneChEvd.mChapterName)
+            }
+        }
+    }
 
-        // sets the image to the imageview from our itemHolder class
-        //holder.imageView.setImageResource(ItemsViewModel.image)
+    // A function to bind the onclickListener.
+    fun setOnClickListener(onClickListener: OnClickListener) {
+        this.onClickListener = onClickListener
+    }
 
-        // sets the text to the textview from our itemHolder class
-        holder.textView.text = chName
-
+    // onClickListener Interface
+    interface OnClickListener {
+        fun onClick(position: Int, chName: String)
     }
 
     // return the number of the items in the list
     override fun getItemCount(): Int {
-        return mList.size
+        return mChEvdList.size
     }
 
     // Holds the views for adding it to image and text
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
-        //val imageView: ImageView = itemView.findViewById(R.id.imageview)
         val textView: TextView = itemView.findViewById(R.id.textView)
     }
 }

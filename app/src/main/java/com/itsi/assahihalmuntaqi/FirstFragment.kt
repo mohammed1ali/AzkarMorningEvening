@@ -5,12 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.itsi.assahihalmuntaqi.databinding.FragmentFirstBinding
-import com.itsi.assahihalmuntaqi.model.DuaData
 import com.itsi.assahihalmuntaqi.model.DuaDb
-import com.itsi.assahihalmuntaqi.primarylist.ItemsViewModel
 import com.itsi.assahihalmuntaqi.primarylist.PrimaryAdapter
 
 /**
@@ -37,20 +35,21 @@ class FirstFragment : Fragment() {
         // this creates a vertical layout Manager
         recyclerview.layoutManager = LinearLayoutManager(context)
 
-        // ArrayList of class ItemsViewModel
-        /*val data = ArrayList<ItemsViewModel>()
-
-        // This loop will create 20 Views containing ...
-        for (i in 1..50) {
-            data.add(ItemsViewModel("Item $i"))
-        }*/
-        val chNamesList = DuaDb().getChapterNames()
+        val chNamesList = DuaDb().getChapterEvd()
 
         // This will pass the ArrayList to our Adapter
         val adapter = PrimaryAdapter(chNamesList)
 
         // Setting the Adapter with the recyclerview
         recyclerview.adapter = adapter
+
+        adapter.setOnClickListener(object :
+            PrimaryAdapter.OnClickListener {
+            override fun onClick(position: Int, chName: String) {
+                Toast.makeText(activity,"$position, $chName", Toast.LENGTH_LONG).show()
+                DuaDb().getDuaEvidenceList(position)
+            }
+        })
 
         return binding.root
     }

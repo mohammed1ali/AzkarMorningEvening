@@ -2,7 +2,6 @@ package com.itsi.assahihalmuntaqi
 
 import android.os.Build
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.navigation.findNavController
@@ -12,7 +11,6 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.os.LocaleListCompat
 import com.itsi.assahihalmuntaqi.databinding.ActivityMainBinding
 import com.itsi.assahihalmuntaqi.model.DuaDb
 import java.util.*
@@ -26,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         super.onCreate(savedInstanceState)
 
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         setAppLocaleOld()
         //setAppLocale()
@@ -40,13 +38,7 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        DuaDb().getChapterNames()
-
-        /*binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAnchorView(R.id.fab)
-                .setAction("Action", null).show()
-        }*/
+        DuaDb().getChapterEvd()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
