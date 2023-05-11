@@ -5,8 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.itsi.assahihalmuntaqi.databinding.FragmentSecondBinding
+import com.itsi.assahihalmuntaqi.model.DuaDb
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -23,18 +25,24 @@ class SecondFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
-        return binding.root
 
+        val chPos = arguments?.getInt("chPos")
+
+        Toast.makeText(activity,"Position = $chPos", Toast.LENGTH_LONG).show()
+        val duaEvidenceList = DuaDb().getDuaEvidenceList(chPos!!);
+
+        _binding!!.tvDua.setText(duaEvidenceList.toString())
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonSecond.setOnClickListener {
+        /*binding.buttonSecond.setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
-        }
+        }*/
     }
 
     override fun onDestroyView() {
