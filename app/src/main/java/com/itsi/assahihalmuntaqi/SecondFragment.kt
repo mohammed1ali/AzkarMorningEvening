@@ -7,8 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.itsi.assahihalmuntaqi.databinding.FragmentSecondBinding
 import com.itsi.assahihalmuntaqi.model.DuaDb
+import com.itsi.assahihalmuntaqi.primarylist.DuaEvdAdapter
+import com.itsi.assahihalmuntaqi.primarylist.PrimaryAdapter
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -27,12 +30,24 @@ class SecondFragment : Fragment() {
     ): View? {
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
 
+        // getting the recyclerview by its ..
+        val recyclerview =_binding!!.recyclerviewDuaEvd
+
+        // this creates a vertical layout Manager
+        recyclerview.layoutManager = LinearLayoutManager(context)
+
         val chPos = arguments?.getInt("chPos")
 
         Toast.makeText(activity,"Position = $chPos", Toast.LENGTH_LONG).show()
         val duaEvidenceList = DuaDb().getDuaEvidenceList(chPos!!);
 
-        _binding!!.tvDua.setText(duaEvidenceList.toString())
+        // This will pass the ArrayList to our Adapter
+        val adapter = DuaEvdAdapter(duaEvidenceList)
+
+        // Setting the Adapter with the recyclerview
+        recyclerview.adapter = adapter
+
+        //_binding!!.tvDua.setText(duaEvidenceList.toString())
 
         return binding.root
     }
