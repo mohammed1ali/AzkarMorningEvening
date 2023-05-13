@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.itsi.assahihalmuntaqi.R
 import com.itsi.assahihalmuntaqi.model.ChapterEvidence
 import com.itsi.assahihalmuntaqi.model.DuaEvidence
+import java.lang.NumberFormatException
+import java.text.NumberFormat
+import java.util.Locale
 
 class DuaEvdAdapter (private val mDuaEvdList: ArrayList<DuaEvidence>) : RecyclerView.Adapter<DuaEvdAdapter.ViewHolder>() {
 
@@ -21,8 +24,24 @@ class DuaEvdAdapter (private val mDuaEvdList: ArrayList<DuaEvidence>) : Recycler
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val oneDuaEvd = mDuaEvdList[position]
-        holder.textViewDua.text = oneDuaEvd.mDua
-        holder.textViewEvd.text = oneDuaEvd.mEvidence
+        if (itemCount==1)
+            holder.textViewDua.text = oneDuaEvd.mDua
+        else
+        {
+            val i = position+1
+            val str = NumberFormat.getInstance(Locale.forLanguageTag("ar"))
+                .format(i) +" - "+ oneDuaEvd.mDua
+            holder.textViewDua.text = str
+        }
+        if(!oneDuaEvd.mEvidence.equals("")) {
+            holder.textViewEvd.visibility = View.VISIBLE
+            holder.viewDividerDuaEvd.visibility = View.VISIBLE
+            holder.textViewEvd.text = oneDuaEvd.mEvidence
+        }
+        else {
+            holder.textViewEvd.visibility = View.GONE
+            holder.viewDividerDuaEvd.visibility = View.GONE
+        }
     }
 
     override fun getItemCount(): Int {
@@ -32,5 +51,6 @@ class DuaEvdAdapter (private val mDuaEvdList: ArrayList<DuaEvidence>) : Recycler
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
         val textViewDua: TextView = itemView.findViewById(R.id.tv_list_dua)
         val textViewEvd: TextView = itemView.findViewById(R.id.tv_list_evd)
+        val viewDividerDuaEvd: View = itemView.findViewById(R.id.divider_dua_evd)
     }
 }

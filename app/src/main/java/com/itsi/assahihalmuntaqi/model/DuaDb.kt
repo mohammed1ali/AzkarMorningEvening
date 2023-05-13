@@ -45,4 +45,9 @@ class DuaDb {
         }
         return duaEvidenceList
     }
+
+    fun getChapterName(chPos: Int): String {
+        val bookJsonArray = JSONArray(DuaData.hardcodedJsonDataAsString)
+        return bookJsonArray.getJSONObject(chPos).getString("ch_name")
+    }
 }

@@ -7,10 +7,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.itsi.assahihalmuntaqi.databinding.FragmentFirstBinding
 import com.itsi.assahihalmuntaqi.model.DuaDb
 import com.itsi.assahihalmuntaqi.primarylist.PrimaryAdapter
+
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -36,6 +38,13 @@ class FirstFragment : Fragment() {
         // this creates a vertical layout Manager
         recyclerview.layoutManager = LinearLayoutManager(context)
 
+        recyclerview.addItemDecoration(
+            DividerItemDecoration(
+                context,
+                DividerItemDecoration.VERTICAL
+            )
+        )
+
         val chNamesList = DuaDb().getChapterEvd()
 
         // This will pass the ArrayList to our Adapter
@@ -52,6 +61,7 @@ class FirstFragment : Fragment() {
 
                 val bundle = Bundle()
                 bundle.putInt("chPos", position)
+                bundle.putString("chName", chName)
                 findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment, bundle)
             }
         })

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.itsi.assahihalmuntaqi.databinding.FragmentSecondBinding
@@ -37,9 +38,13 @@ class SecondFragment : Fragment() {
         recyclerview.layoutManager = LinearLayoutManager(context)
 
         val chPos = arguments?.getInt("chPos")
+        val chName = arguments?.getString("chName")
 
         Toast.makeText(activity,"Position = $chPos", Toast.LENGTH_LONG).show()
-        val duaEvidenceList = DuaDb().getDuaEvidenceList(chPos!!);
+        val duaEvidenceList = DuaDb().getDuaEvidenceList(chPos!!)
+
+        //((AppCompatActivity)(getActivity())).getSupportActionBar()
+        //supportActionBar.title = DuaDb().getChapterName(chPos)
 
         // This will pass the ArrayList to our Adapter
         val adapter = DuaEvdAdapter(duaEvidenceList)
@@ -48,6 +53,8 @@ class SecondFragment : Fragment() {
         recyclerview.adapter = adapter
 
         //_binding!!.tvDua.setText(duaEvidenceList.toString())
+
+
 
         return binding.root
     }
