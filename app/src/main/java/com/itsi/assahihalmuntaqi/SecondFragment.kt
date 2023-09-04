@@ -7,12 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.itsi.assahihalmuntaqi.databinding.FragmentSecondBinding
 import com.itsi.assahihalmuntaqi.model.DuaDb
 import com.itsi.assahihalmuntaqi.primarylist.DuaEvdAdapter
 import com.itsi.assahihalmuntaqi.primarylist.PrimaryAdapter
+import com.itsi.assahihalmuntaqi.viewmodels.SharedViewModel
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -20,6 +22,7 @@ import com.itsi.assahihalmuntaqi.primarylist.PrimaryAdapter
 class SecondFragment : Fragment() {
 
     private var _binding: FragmentSecondBinding? = null
+    private lateinit var viewModel: SharedViewModel
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -54,7 +57,10 @@ class SecondFragment : Fragment() {
 
         //_binding!!.tvDua.setText(duaEvidenceList.toString())
 
-
+        viewModel = activity?.run {
+            ViewModelProvider(this)[SharedViewModel::class.java]
+        } ?: throw Exception("Invalid Activity")
+        viewModel.pageTitle(chName?:"")
 
         return binding.root
     }

@@ -39,11 +39,7 @@ class FirstFragment : Fragment() {
         recyclerview.layoutManager = LinearLayoutManager(context)
 
         recyclerview.addItemDecoration(
-            DividerItemDecoration(
-                context,
-                DividerItemDecoration.VERTICAL
-            )
-        )
+            DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
 
         val chNamesList = DuaDb().getChapterEvd()
 

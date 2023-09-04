@@ -4,10 +4,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.view.marginBottom
 import androidx.recyclerview.widget.RecyclerView
 import com.itsi.assahihalmuntaqi.R
 import com.itsi.assahihalmuntaqi.model.ChapterEvidence
 import com.itsi.assahihalmuntaqi.model.DuaEvidence
+import com.itsi.assahihalmuntaqi.utils.MyUtils
 import java.lang.NumberFormatException
 import java.text.NumberFormat
 import java.util.Locale
@@ -24,6 +26,7 @@ class DuaEvdAdapter (private val mDuaEvdList: ArrayList<DuaEvidence>) : Recycler
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val oneDuaEvd = mDuaEvdList[position]
+
         if (itemCount==1)
             holder.textViewDua.text = oneDuaEvd.mDua
         else
@@ -37,10 +40,20 @@ class DuaEvdAdapter (private val mDuaEvdList: ArrayList<DuaEvidence>) : Recycler
             holder.textViewEvd.visibility = View.VISIBLE
             holder.viewDividerDuaEvd.visibility = View.VISIBLE
             holder.textViewEvd.text = oneDuaEvd.mEvidence
+
+            val param = holder.textViewDua.layoutParams as ViewGroup.MarginLayoutParams
+            param.setMargins(0,0,0, MyUtils()
+                .convertDpToPixel(8.0f, holder.textViewDua.context).toInt())
+            holder.textViewDua.layoutParams = param
+
         }
         else {
             holder.textViewEvd.visibility = View.GONE
             holder.viewDividerDuaEvd.visibility = View.GONE
+
+            val param = holder.textViewDua.layoutParams as ViewGroup.MarginLayoutParams
+            param.setMargins(0,0,0,0)
+            holder.textViewDua.layoutParams = param
         }
     }
 
