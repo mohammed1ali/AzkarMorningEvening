@@ -1,4 +1,4 @@
-package com.itsi.assahihalmuntaqi.viewmodels
+package com.itsi.almuntaqimorevn.viewmodels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

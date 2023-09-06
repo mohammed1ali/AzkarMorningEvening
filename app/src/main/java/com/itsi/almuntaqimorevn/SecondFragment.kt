@@ -1,4 +1,4 @@
-package com.itsi.assahihalmuntaqi
+package com.itsi.almuntaqimorevn
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,15 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.itsi.assahihalmuntaqi.databinding.FragmentSecondBinding
-import com.itsi.assahihalmuntaqi.model.DuaDb
-import com.itsi.assahihalmuntaqi.primarylist.DuaEvdAdapter
-import com.itsi.assahihalmuntaqi.primarylist.PrimaryAdapter
-import com.itsi.assahihalmuntaqi.viewmodels.SharedViewModel
+import com.itsi.almuntaqimorevn.databinding.FragmentSecondBinding
+import com.itsi.almuntaqimorevn.model.DuaDb
+import com.itsi.almuntaqimorevn.primarylist.DuaEvdAdapter
+import com.itsi.almuntaqimorevn.viewmodels.SharedViewModel
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.

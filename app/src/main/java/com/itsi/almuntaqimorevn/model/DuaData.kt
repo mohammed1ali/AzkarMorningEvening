@@ -1,4 +1,4 @@
-package com.itsi.assahihalmuntaqi.model
+package com.itsi.almuntaqimorevn.model
 
 class DuaData {
 

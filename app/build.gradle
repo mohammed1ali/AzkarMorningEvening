@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace 'com.itsi.assahihalmuntaqi'
+    namespace 'com.itsi.almuntaqimorevn'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.itsi.assahihalmuntaqi"
+        applicationId "com.itsi.almuntaqimorevn"
         minSdk 21
         //noinspection EditedTargetSdkVersion
         targetSdk 34

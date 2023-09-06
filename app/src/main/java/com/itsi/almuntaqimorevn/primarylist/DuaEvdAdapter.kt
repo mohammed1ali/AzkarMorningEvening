@@ -1,16 +1,13 @@
-package com.itsi.assahihalmuntaqi.primarylist
+package com.itsi.almuntaqimorevn.primarylist
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.view.marginBottom
 import androidx.recyclerview.widget.RecyclerView
-import com.itsi.assahihalmuntaqi.R
-import com.itsi.assahihalmuntaqi.model.ChapterEvidence
-import com.itsi.assahihalmuntaqi.model.DuaEvidence
-import com.itsi.assahihalmuntaqi.utils.MyUtils
-import java.lang.NumberFormatException
+import com.itsi.almuntaqimorevn.R
+import com.itsi.almuntaqimorevn.model.DuaEvidence
+import com.itsi.almuntaqimorevn.utils.MyUtils
 import java.text.NumberFormat
 import java.util.Locale
 

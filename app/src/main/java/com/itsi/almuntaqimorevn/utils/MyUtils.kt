@@ -1,4 +1,4 @@
-package com.itsi.assahihalmuntaqi.utils
+package com.itsi.almuntaqimorevn.utils
 
 import android.content.Context
 import android.content.res.Resources

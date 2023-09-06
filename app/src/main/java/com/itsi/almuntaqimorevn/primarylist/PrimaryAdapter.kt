@@ -1,11 +1,11 @@
-package com.itsi.assahihalmuntaqi.primarylist
+package com.itsi.almuntaqimorevn.primarylist
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.itsi.assahihalmuntaqi.R
-import com.itsi.assahihalmuntaqi.model.ChapterEvidence
+import com.itsi.almuntaqimorevn.R
+import com.itsi.almuntaqimorevn.model.ChapterEvidence
 
 class PrimaryAdapter(private val mChEvdList: ArrayList<ChapterEvidence>) : RecyclerView.Adapter<PrimaryAdapter.ViewHolder>() {
 

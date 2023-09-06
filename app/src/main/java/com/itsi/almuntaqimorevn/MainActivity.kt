@@ -1,4 +1,4 @@
-package com.itsi.assahihalmuntaqi
+package com.itsi.almuntaqimorevn
 
 import android.os.Build
 import android.os.Bundle
@@ -8,14 +8,13 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.itsi.assahihalmuntaqi.databinding.ActivityMainBinding
-import com.itsi.assahihalmuntaqi.model.DuaDb
-import com.itsi.assahihalmuntaqi.viewmodels.SharedViewModel
+import com.itsi.almuntaqimorevn.databinding.ActivityMainBinding
+import com.itsi.almuntaqimorevn.model.DuaDb
+import com.itsi.almuntaqimorevn.viewmodels.SharedViewModel
 import java.util.Locale
 
 class MainActivity : AppCompatActivity() {

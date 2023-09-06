@@ -1,4 +1,4 @@
-package com.itsi.assahihalmuntaqi
+package com.itsi.almuntaqimorevn
 
 import org.junit.Test
 

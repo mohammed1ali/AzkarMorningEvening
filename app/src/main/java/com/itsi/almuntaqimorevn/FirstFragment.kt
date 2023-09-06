@@ -1,4 +1,4 @@
-package com.itsi.assahihalmuntaqi
+package com.itsi.almuntaqimorevn
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,9 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.itsi.assahihalmuntaqi.databinding.FragmentFirstBinding
-import com.itsi.assahihalmuntaqi.model.DuaDb
-import com.itsi.assahihalmuntaqi.primarylist.PrimaryAdapter
+import com.itsi.almuntaqimorevn.databinding.FragmentFirstBinding
+import com.itsi.almuntaqimorevn.model.DuaDb
+import com.itsi.almuntaqimorevn.primarylist.PrimaryAdapter
 
 
 /**
@@ -58,7 +58,7 @@ class FirstFragment : Fragment() {
                 val bundle = Bundle()
                 bundle.putInt("chPos", position)
                 bundle.putString("chName", chName)
-                findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment, bundle)
+                //findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment, bundle)
             }
         })
 

@@ -1,4 +1,4 @@
-package com.itsi.assahihalmuntaqi.model
+package com.itsi.almuntaqimorevn.model
 
 import android.util.Log
 import org.json.JSONArray
