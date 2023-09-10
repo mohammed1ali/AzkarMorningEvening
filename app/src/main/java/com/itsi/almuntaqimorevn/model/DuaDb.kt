@@ -30,7 +30,7 @@ class DuaDb {
      **/
     fun getDuaEvidenceList(chPos:Int): ArrayList<DuaEvidence> {
         val bookJsonArray = JSONArray(DuaData.hardcodedJsonDataAsString)
-        val chName = bookJsonArray.getJSONObject(chPos).getString("ch_name")
+        //val chName = bookJsonArray.getJSONObject(chPos).getString("ch_name")
         val oneChObject = bookJsonArray.getJSONObject(chPos)
         val duaArray = oneChObject.getJSONArray("duas")
         var duaEvidenceList = ArrayList<DuaEvidence>()

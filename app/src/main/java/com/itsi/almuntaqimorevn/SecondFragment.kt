@@ -37,8 +37,8 @@ class SecondFragment : Fragment() {
         // this creates a vertical layout Manager
         recyclerview.layoutManager = LinearLayoutManager(context)
 
-        val chPos = arguments?.getInt("chPos")
-        val chName = arguments?.getString("chName")
+        val chPos = 0 // arguments?.getInt("chPos", 0)
+        val chName = getString(R.string.app_name)  // arguments?.getString("chName", "")
 
         Toast.makeText(activity,"Position = $chPos", Toast.LENGTH_LONG).show()
         val duaEvidenceList = DuaDb().getDuaEvidenceList(chPos!!)
