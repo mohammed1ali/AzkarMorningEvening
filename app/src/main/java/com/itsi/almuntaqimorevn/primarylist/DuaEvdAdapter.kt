@@ -1,9 +1,11 @@
 package com.itsi.almuntaqimorevn.primarylist
 
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.itsi.almuntaqimorevn.R
 import com.itsi.almuntaqimorevn.model.DuaEvidence
@@ -29,9 +31,10 @@ class DuaEvdAdapter (private val mDuaEvdList: ArrayList<DuaEvidence>) : Recycler
         else
         {
             val i = position+1
-            val str = NumberFormat.getInstance(Locale.forLanguageTag("ar"))
+            val duaStr = NumberFormat.getInstance(Locale.forLanguageTag("ar"))
                 .format(i) +" - "+ oneDuaEvd.mDua
-            holder.textViewDua.text = str
+            //parseAndMakeNabiSpeechRed(oneDuaEvd.mDua);
+            holder.textViewDua.text = HtmlCompat.fromHtml(duaStr, HtmlCompat.FROM_HTML_MODE_LEGACY)
         }
         if(!oneDuaEvd.mEvidence.equals("")) {
             holder.textViewEvd.visibility = View.VISIBLE
@@ -51,6 +54,39 @@ class DuaEvdAdapter (private val mDuaEvdList: ArrayList<DuaEvidence>) : Recycler
             val param = holder.textViewDua.layoutParams as ViewGroup.MarginLayoutParams
             param.setMargins(0,0,0,0)
             holder.textViewDua.layoutParams = param
+        }
+    }
+
+    /***
+     * TODO: Make logic for spanning with span array to show Nabi's speech in red
+     */
+    private fun parseAndMakeNabiSpeechRed(duaStr: String) {
+        var duaForSpan = arrayOf<String>()
+        var startRedText = false
+        var spanIndex = 0
+        var strWithoutSpan = ""
+        for (i in 0 until duaStr.length) {
+            //println(str[i])
+            if (duaStr[i].equals("r")) {
+
+            } else if (duaStr[i].equals("e")) {
+
+            } else {
+
+            }
+
+        }
+        duaStr.forEach {
+            if (it.equals("r")) {
+                startRedText = true
+            }
+            if (it.equals("e")) {
+                startRedText = false
+            }
+            //tempStr[it.]
+            if (startRedText) {
+
+            }
         }
     }
 

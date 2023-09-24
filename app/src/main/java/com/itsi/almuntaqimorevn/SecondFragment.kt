@@ -40,7 +40,7 @@ class SecondFragment : Fragment() {
         val chPos = 0 // arguments?.getInt("chPos", 0)
         val chName = getString(R.string.app_name)  // arguments?.getString("chName", "")
 
-        Toast.makeText(activity,"Position = $chPos", Toast.LENGTH_LONG).show()
+        //Toast.makeText(activity,"Position = $chPos", Toast.LENGTH_LONG).show()
         val duaEvidenceList = DuaDb().getDuaEvidenceList(chPos!!)
 
         //((AppCompatActivity)(getActivity())).getSupportActionBar()
