@@ -1,6 +1,6 @@
 package com.itsi.almuntaqimorevn.primarylist
 
-import android.text.Html
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +12,7 @@ import com.itsi.almuntaqimorevn.model.DuaEvidence
 import com.itsi.almuntaqimorevn.utils.MyUtils
 import java.text.NumberFormat
 import java.util.Locale
+
 
 class DuaEvdAdapter (private val mDuaEvdList: ArrayList<DuaEvidence>) : RecyclerView.Adapter<DuaEvdAdapter.ViewHolder>() {
 
@@ -31,8 +32,11 @@ class DuaEvdAdapter (private val mDuaEvdList: ArrayList<DuaEvidence>) : Recycler
         else
         {
             val i = position+1
+            val dua = parseAndMakeNabiSpeechRed(oneDuaEvd.mDua)
+            /*val duaStr = NumberFormat.getInstance(Locale.forLanguageTag("ar"))
+                .format(i) +" - "+ oneDuaEvd.mDua*/
             val duaStr = NumberFormat.getInstance(Locale.forLanguageTag("ar"))
-                .format(i) +" - "+ oneDuaEvd.mDua
+                .format(i) +" - "+ dua
             //parseAndMakeNabiSpeechRed(oneDuaEvd.mDua);
             holder.textViewDua.text = HtmlCompat.fromHtml(duaStr, HtmlCompat.FROM_HTML_MODE_LEGACY)
         }
@@ -58,36 +62,42 @@ class DuaEvdAdapter (private val mDuaEvdList: ArrayList<DuaEvidence>) : Recycler
     }
 
     /***
-     * TODO: Make logic for spanning with span array to show Nabi's speech in red
+     * TOD: Make logic for spanning with span array to show Nabi's speech in red
      */
-    private fun parseAndMakeNabiSpeechRed(duaStr: String) {
-        var duaForSpan = arrayOf<String>()
-        var startRedText = false
-        var spanIndex = 0
-        var strWithoutSpan = ""
-        for (i in 0 until duaStr.length) {
-            //println(str[i])
-            if (duaStr[i].equals("r")) {
+    private fun parseAndMakeNabiSpeechRed(duaStr: String): String {
+        val startRedSymbol = "«"
+        val endRedSymbol = "»"
+        var duaString = duaStr
 
-            } else if (duaStr[i].equals("e")) {
-
-            } else {
-
-            }
-
+        var index: Int = duaString.indexOf(startRedSymbol)
+        while (index != -1) {
+            duaString = StringBuilder(duaString).insert(index+1, "<font color='#D2042D'>").toString()
+            index = duaString.indexOf(startRedSymbol, index + 1)
+            Log.d("MATCHER $index", duaString)
         }
-        duaStr.forEach {
-            if (it.equals("r")) {
-                startRedText = true
-            }
-            if (it.equals("e")) {
-                startRedText = false
-            }
-            //tempStr[it.]
-            if (startRedText) {
 
-            }
+        index = duaString.indexOf(endRedSymbol)
+        while (index != -1) {
+            duaString = StringBuilder(duaString).insert(index+1, "</font>").toString()
+            index = duaString.indexOf(endRedSymbol, index + 1)
+            Log.d("MATCHER $index", duaString)
         }
+
+
+        /*val matcher1: Matcher = Pattern.compile(startRedSymbol).matcher(duaStr)
+        while (matcher1.find()) {
+            val index = matcher1.start()
+            duaString = StringBuilder(duaString).insert(index, "<font color='#D2042D'>").toString()
+            Log.d("MATCHER1", duaString)
+        }
+        val matcher2: Matcher = Pattern.compile(endRedSymbol).matcher(duaStr)
+        while (matcher2.find()) {
+            val index = matcher2.start()
+            duaString = StringBuilder(duaString).insert(index, "</font>").toString()
+            Log.d("MATCHER2", duaString)
+        }*/
+        Log.d("DUASTRING", duaString)
+        return duaString
     }
 
     override fun getItemCount(): Int {
