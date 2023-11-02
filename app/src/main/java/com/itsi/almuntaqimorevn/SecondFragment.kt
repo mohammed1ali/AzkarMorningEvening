@@ -5,12 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.itsi.almuntaqimorevn.databinding.FragmentSecondBinding
 import com.itsi.almuntaqimorevn.model.DuaDb
 import com.itsi.almuntaqimorevn.primarylist.DuaEvdAdapter
+import com.itsi.almuntaqimorevn.utils.BkmUtils
 import com.itsi.almuntaqimorevn.viewmodels.SharedViewModel
 
 /**
@@ -37,17 +37,18 @@ class SecondFragment : Fragment() {
         // this creates a vertical layout Manager
         recyclerview.layoutManager = LinearLayoutManager(context)
 
-        val chPos = 0 // arguments?.getInt("chPos", 0)
-        val chName = getString(R.string.app_name)  // arguments?.getString("chName", "")
+        val chPos = 0
+        val chName = getString(R.string.app_name)
 
         //Toast.makeText(activity,"Position = $chPos", Toast.LENGTH_LONG).show()
         val duaEvidenceList = DuaDb().getDuaEvidenceList(chPos!!)
 
         //((AppCompatActivity)(getActivity())).getSupportActionBar()
         //supportActionBar.title = DuaDb().getChapterName(chPos)
+        val bookmarksList = this.context?.let { BkmUtils().getAllBookmarks(it) }
 
         // This will pass the ArrayList to our Adapter
-        val adapter = DuaEvdAdapter(duaEvidenceList)
+        val adapter = DuaEvdAdapter(duaEvidenceList, bookmarksList)
 
         // Setting the Adapter with the recyclerview
         recyclerview.adapter = adapter

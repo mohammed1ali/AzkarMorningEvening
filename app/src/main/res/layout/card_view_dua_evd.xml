@@ -2,6 +2,7 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
@@ -18,12 +19,39 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="16dp"
+        android:paddingTop="4dp"
         android:paddingBottom="16dp"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
         android:orientation="vertical"
         >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:id="@+id/tv_dua_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textSize="14sp"
+                android:text="٦۳"
+                 />
+
+            <ImageButton
+                android:id="@+id/btn_options"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_more_horiz" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/tv_list_dua"
@@ -32,7 +60,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="8dp"
         android:gravity="center_horizontal"
-        android:textSize="22sp"
+        android:textSize="24sp"
         android:textColor="@color/black"
         android:text="TextView" />
 
@@ -47,7 +75,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:gravity="center_horizontal"
-        android:textSize="17sp"
+        android:textSize="20sp"
+        android:alpha="0.8"
         android:textColor="@color/grey"
         android:text="TextView" />
 
