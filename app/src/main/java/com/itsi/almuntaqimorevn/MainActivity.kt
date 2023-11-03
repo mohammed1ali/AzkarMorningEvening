@@ -1,21 +1,24 @@
 package com.itsi.almuntaqimorevn
 
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.WindowCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.MenuItem
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.itsi.almuntaqimorevn.databinding.ActivityMainBinding
 import com.itsi.almuntaqimorevn.model.DuaDb
+import com.itsi.almuntaqimorevn.utils.MyContextWrapper
 import com.itsi.almuntaqimorevn.viewmodels.SharedViewModel
 import java.util.Locale
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
-        setAppLocaleOld()
+        //setAppLocaleOld()
         //setAppLocale()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -82,6 +85,7 @@ class MainActivity : AppCompatActivity() {
         config.setLocale(locale)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
             createConfigurationContext(config)
+
         resources.updateConfiguration(config, resources.displayMetrics)
     }
 
@@ -92,4 +96,8 @@ class MainActivity : AppCompatActivity() {
         // Call this on the main thread as it may require Activity.restart()
         AppCompatDelegate.setApplicationLocales(appLocale)
     }*/
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(MyContextWrapper.wrap(newBase, "ar"))
+    }
 }
