@@ -1,10 +1,5 @@
-package com.itsi.almuntaqimorevn.primarylist
+package com.itsi.almuntaqimorevn.bookmarkslist
 
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
-import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,41 +11,37 @@ import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.itsi.almuntaqimorevn.R
+import com.itsi.almuntaqimorevn.model.DuaDb
 import com.itsi.almuntaqimorevn.model.DuaEvidence
 import com.itsi.almuntaqimorevn.utils.BkmUtils
 import com.itsi.almuntaqimorevn.utils.MyUtils
 import java.text.NumberFormat
 import java.util.Locale
 
-
-class DuaEvdAdapter(private val mDuaEvdList: ArrayList<DuaEvidence>,
-                    private var mBookmarksList: ArrayList<Int>?)
-    : RecyclerView.Adapter<DuaEvdAdapter.ViewHolder>() {
-
-
+class BookmarksAdapter(private var mBookmarkedDuaEvdList: ArrayList<DuaEvidence>) :
+    RecyclerView.Adapter<BookmarksAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.card_view_dua_evd, parent, false)
-
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val oneDuaEvd = mDuaEvdList[position]
+        val oneDuaEvd = mBookmarkedDuaEvdList[position]
 
-        if (itemCount==1)
+        if (itemCount==1) {
+            holder.tvDuaNumber.text = NumberFormat.getInstance(Locale.forLanguageTag("ar"))
+                .format(oneDuaEvd.mId)
             holder.textViewDua.text = oneDuaEvd.mDua
+            holder.textViewEvd.text = oneDuaEvd.mEvidence
+        }
         else
         {
             val i = position+1
             val dua = MyUtils().parseAndMakeNabiSpeechRed(oneDuaEvd.mDua)
-            /*val duaStr = NumberFormat.getInstance(Locale.forLanguageTag("ar"))
-                .format(i) +" - "+ oneDuaEvd.mDua*/
-            /*val duaStr = NumberFormat.getInstance(Locale.forLanguageTag("ar"))
-                .format(i) +" - "+ dua*/
-            //parseAndMakeNabiSpeechRed(oneDuaEvd.mDua);
+
             holder.tvDuaNumber.text = NumberFormat.getInstance(Locale.forLanguageTag("ar"))
-                .format(i)
+                .format(oneDuaEvd.mId)
 
             if (oneDuaEvd.mQuranic) {
                 val typeface = ResourcesCompat.getFont(holder.textViewDua.context, com.itsi.almuntaqimorevn.R.font.uthmanic_hafs1_ver18)
@@ -89,14 +80,15 @@ class DuaEvdAdapter(private val mDuaEvdList: ArrayList<DuaEvidence>,
             val bt = BottomSheetDialog(it.context, R.style.BottomSheetDialogTheme)
             val view: View = LayoutInflater.from(it.context).inflate(R.layout.bottom_sheet_lay, null)
 
-            if(mBookmarksList?.contains(position+1) == true) {
+            view.findViewById<TextView>(R.id.tv_btmsht_bookmark).text = it.context.getString(R.string.remove_bookmark)
+
+            /*if(mBookmarksList?.contains(position+1) == true) {
                 view.findViewById<TextView>(R.id.tv_btmsht_bookmark).text = it.context.getString(R.string.remove_bookmark)
             } else {
                 view.findViewById<TextView>(R.id.tv_btmsht_bookmark).text = it.context.getString(R.string.bookmark)
-            }
+            }*/
 
             view.findViewById<View>(R.id.tv_btmsht_share).setOnClickListener {
-                //Toast.makeText(it.context, "add to cart", Toast.LENGTH_LONG).show()
                 bt.dismiss()
 
                 /*This will be the actual content you wish you share.*/
@@ -107,7 +99,13 @@ class DuaEvdAdapter(private val mDuaEvdList: ArrayList<DuaEvidence>,
             view.findViewById<View>(R.id.tv_btmsht_bookmark).setOnClickListener {
                 bt.dismiss()
 
-                if(mBookmarksList?.contains(position+1) == true) {
+                BkmUtils().removeBookmark(oneDuaEvd.mId, it.context)
+                Toast.makeText(it.context, it.context.getString(R.string.bookmark_removed),
+                    Toast.LENGTH_SHORT).show()
+                val bookmarksList = BkmUtils().getAllBookmarks(it.context)
+                mBookmarkedDuaEvdList = DuaDb().getBookmarkedDuaEvd(bookmarksList)
+                notifyItemRemoved(position)
+                /*if(mBookmarksList?.contains(position+1) == true) {
                     BkmUtils().removeBookmark(position+1, it.context)
                     Toast.makeText(it.context, it.context.getString(R.string.bookmark_removed),
                         Toast.LENGTH_SHORT).show()
@@ -116,7 +114,7 @@ class DuaEvdAdapter(private val mDuaEvdList: ArrayList<DuaEvidence>,
                     BkmUtils().saveBookmark(position + 1, it.context)
                     Toast.makeText(it.context, it.context.getString(R.string.bookmark_added), Toast.LENGTH_SHORT).show()
                     mBookmarksList = BkmUtils().getAllBookmarks(it.context)
-                }
+                }*/
             }
 
             view.findViewById<View>(R.id.tv_btmsht_copy).setOnClickListener {
@@ -131,7 +129,7 @@ class DuaEvdAdapter(private val mDuaEvdList: ArrayList<DuaEvidence>,
     }
 
     override fun getItemCount(): Int {
-        return mDuaEvdList.size
+        return mBookmarkedDuaEvdList.size
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

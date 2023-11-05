@@ -57,4 +57,29 @@ class DuaDb {
         val bookJsonArray = JSONArray(DuaData.hardcodedJsonDataAsString)
         return bookJsonArray.getJSONObject(chPos).getString("ch_name")
     }
+
+    fun getBookmarkedDuaEvd(bookmarksList: ArrayList<Int>?): ArrayList<DuaEvidence> {
+        val bookJsonArray = JSONArray(DuaData.hardcodedJsonDataAsString)
+        val oneChObject = bookJsonArray.getJSONObject(0)    // chPos = 0
+        val duaArray = oneChObject.getJSONArray("duas")
+        val duaEvidenceList = ArrayList<DuaEvidence>()
+
+        for (i in 0 until duaArray.length()) {
+            val oneDuaObj = duaArray.getJSONObject(i)
+            Log.i("ID: ", oneDuaObj.toString())
+            var quranic = false
+            try {
+                quranic = oneDuaObj.getBoolean("quranic")
+            } catch (_:Exception) {
+
+            }
+
+            if(bookmarksList!!.contains(oneDuaObj.getInt("id"))) {
+                val duaEvidence = DuaEvidence(oneDuaObj.getInt("id"), oneDuaObj.getString("dua"),
+                    oneDuaObj.getString("evidence"), quranic)
+                duaEvidenceList.add(duaEvidence)
+            }
+        }
+        return duaEvidenceList
+    }
 }

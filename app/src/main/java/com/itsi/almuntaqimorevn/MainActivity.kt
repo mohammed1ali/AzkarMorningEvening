@@ -10,9 +10,12 @@ import androidx.core.view.WindowCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.itsi.almuntaqimorevn.databinding.ActivityMainBinding
 import com.itsi.almuntaqimorevn.model.DuaDb
 import com.itsi.almuntaqimorevn.utils.MyContextWrapper
@@ -40,18 +43,49 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
 
+        val bottomNavView: BottomNavigationView = binding.bottomNavigation
 
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
+        var navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main) as NavHostFragment
+
+        val navController = navHostFragment.navController //findNavController(R.id.nav_host_fragment_content_main)
+
+        val topLevelDestinations = setOf(R.id.secondFragment,
+            R.id.bookmarksFragment)
+        /*appBarConfiguration = AppBarConfiguration.Builder(topLevelDestinations)
+            //.setDrawerLayout(drawerLayout)
+            .build()*/
+        //appBarConfiguration = AppBarConfiguration(navController.graph)
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+            R.id.secondFragment, R.id.bookmarksFragment
+        ))
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        DuaDb().getChapterEvd()
+        //DuaDb().getChapterEvd()
 
         viewModel = ViewModelProvider(this)[SharedViewModel::class.java]
         viewModel.selected.observe(this, Observer<String>  { item ->
             supportActionBar?.title = item
             // Update the UI using new item data
         })
+
+        bottomNavView.setupWithNavController(navController)
+
+
+
+
+        /*bottomNavView.setOnItemSelectedListener {
+            when(it.itemId) {
+                R.id.item_home -> {
+                    //navController.na
+                    true
+                }
+
+                else -> false
+            }
+        }*/
+
     }
 
     /*override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -75,6 +109,8 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
     }
+
+
 
     @Deprecated("Uses deprecated Api", ReplaceWith("Use setApplicationLocales(appLocale)"), DeprecationLevel.WARNING)
     private fun setAppLocaleOld() {
