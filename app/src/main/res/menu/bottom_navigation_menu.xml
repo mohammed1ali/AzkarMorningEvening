@@ -10,7 +10,7 @@
         android:icon="@drawable/ic_bookmarks"
         android:title="@string/title_bookmarks"/>
     <item
-        android:id="@+id/item_settings"
+        android:id="@+id/settingsFragment"
         android:enabled="true"
         android:icon="@drawable/ic_settings_applications"
         android:title="@string/title_settings"/>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="txt_general">#FFFFFF</color>
+    <color name="txt_dua">#FFFFFF</color>
+    <color name="txt_evidence">#DDDDDD</color>
+
+    <color name="txt_nabi_speech">#CBEFFF</color>
+    <color name="txt_nabi_speech_evd">#A7E4FF</color>
+</resources>

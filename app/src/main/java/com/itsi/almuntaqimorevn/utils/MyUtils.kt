@@ -5,6 +5,7 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
+import android.os.Build
 import android.util.DisplayMetrics
 import android.util.Log
 import com.itsi.almuntaqimorevn.R
@@ -48,15 +49,29 @@ class MyUtils {
 
     /***
      * TOD: Make logic for spanning with span array to show Nabi's speech in red
+     * TextType 1 for Dua 2 for Evidence
      */
-    fun parseAndMakeNabiSpeechRed(duaStr: String): String {
+    fun parseAndMakeNabiSpeechRed(context: Context, duaStr: String, textType:Int): String {
         val startRedSymbol = "«"
         val endRedSymbol = "»"
         var duaString = duaStr
+        var color:Int
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+            if(textType == TEXT_TYPE_DUA)
+                color = context.resources.getColor(R.color.txt_nabi_speech)
+            else
+                color = context.resources.getColor(R.color.txt_nabi_speech_evd)
+        } else {
+            if(textType == TEXT_TYPE_DUA)
+                color = context.resources.getColor(R.color.txt_nabi_speech, null)
+            else
+                color = context.resources.getColor(R.color.txt_nabi_speech_evd, null)
+        }
 
         var index: Int = duaString.indexOf(startRedSymbol)
         while (index != -1) {
-            duaString = StringBuilder(duaString).insert(index+1, "<font color='#D2042D'>").toString()
+            duaString = StringBuilder(duaString)
+                .insert(index+1, "<font color='" + color.toString() + "'>").toString()
             index = duaString.indexOf(startRedSymbol, index + 1)
             Log.d("MATCHER $index", duaString)
         }
@@ -103,5 +118,10 @@ class MyUtils {
         val clipboard: ClipboardManager? = context?.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager?
         val clip = ClipData.newPlainText(context?.getString(R.string.app_name), copyStr)
         clipboard?.setPrimaryClip(clip)
+    }
+
+    companion object {
+        val TEXT_TYPE_DUA = 1
+        val TEXT_TYPE_EVIDENCE = 2
     }
 }

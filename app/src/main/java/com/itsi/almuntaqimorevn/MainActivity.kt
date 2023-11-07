@@ -33,36 +33,12 @@ class MainActivity : AppCompatActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         super.onCreate(savedInstanceState)
 
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-
-        //setAppLocaleOld()
-        //setAppLocale()
+        //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
-
-        val bottomNavView: BottomNavigationView = binding.bottomNavigation
-
-        var navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main) as NavHostFragment
-
-        val navController = navHostFragment.navController //findNavController(R.id.nav_host_fragment_content_main)
-
-        val topLevelDestinations = setOf(R.id.secondFragment,
-            R.id.bookmarksFragment)
-        /*appBarConfiguration = AppBarConfiguration.Builder(topLevelDestinations)
-            //.setDrawerLayout(drawerLayout)
-            .build()*/
-        //appBarConfiguration = AppBarConfiguration(navController.graph)
-        appBarConfiguration = AppBarConfiguration(
-            setOf(
-            R.id.secondFragment, R.id.bookmarksFragment
-        ))
-        setupActionBarWithNavController(navController, appBarConfiguration)
-
-        //DuaDb().getChapterEvd()
+        setupActionNBottomNavBarNNavController()
 
         viewModel = ViewModelProvider(this)[SharedViewModel::class.java]
         viewModel.selected.observe(this, Observer<String>  { item ->
@@ -70,21 +46,23 @@ class MainActivity : AppCompatActivity() {
             // Update the UI using new item data
         })
 
+    }
+
+    private fun setupActionNBottomNavBarNNavController() {
+        setSupportActionBar(binding.toolbar)
+        val bottomNavView: BottomNavigationView = binding.bottomNavigation
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.nav_host_fragment_content_main) as NavHostFragment
+
+        val navController = navHostFragment.navController //findNavController(R.id.nav_host_fragment_content_main)
+        //val topLevelDestinations = setOf(R.id.secondFragment, R.id.bookmarksFragment)
+        //appBarConfiguration = AppBarConfiguration(navController.graph)
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.secondFragment, R.id.bookmarksFragment, R.id.settingsFragment
+            ))
+        setupActionBarWithNavController(navController, appBarConfiguration)
         bottomNavView.setupWithNavController(navController)
-
-
-
-
-        /*bottomNavView.setOnItemSelectedListener {
-            when(it.itemId) {
-                R.id.item_home -> {
-                    //navController.na
-                    true
-                }
-
-                else -> false
-            }
-        }*/
 
     }
 
@@ -110,8 +88,6 @@ class MainActivity : AppCompatActivity() {
                 || super.onSupportNavigateUp()
     }
 
-
-
     @Deprecated("Uses deprecated Api", ReplaceWith("Use setApplicationLocales(appLocale)"), DeprecationLevel.WARNING)
     private fun setAppLocaleOld() {
         val config = resources.configuration
@@ -124,14 +100,6 @@ class MainActivity : AppCompatActivity() {
 
         resources.updateConfiguration(config, resources.displayMetrics)
     }
-
-    /*private fun setAppLocale() {
-        ODO("Test with Api 33, 26 and also lollipop")
-        val appLocale: LocaleListCompat =
-            LocaleListCompat.forLanguageTags("ar")
-        // Call this on the main thread as it may require Activity.restart()
-        AppCompatDelegate.setApplicationLocales(appLocale)
-    }*/
 
     override fun attachBaseContext(newBase: Context) {
         super.attachBaseContext(MyContextWrapper.wrap(newBase, "ar"))

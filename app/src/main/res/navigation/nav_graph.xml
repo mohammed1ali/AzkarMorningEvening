@@ -37,4 +37,12 @@
         tools:layout="@layout/fragment_bookmarks">
 
     </fragment>
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.itsi.almuntaqimorevn.SettingsFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_settings">
+
+    </fragment>
 </navigation>

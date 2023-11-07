@@ -43,7 +43,7 @@ class DuaEvdAdapter(private val mDuaEvdList: ArrayList<DuaEvidence>,
         else
         {
             val i = position+1
-            val dua = MyUtils().parseAndMakeNabiSpeechRed(oneDuaEvd.mDua)
+            val dua = MyUtils().parseAndMakeNabiSpeechRed(holder.textViewDua.context,oneDuaEvd.mDua, MyUtils.TEXT_TYPE_DUA)
             /*val duaStr = NumberFormat.getInstance(Locale.forLanguageTag("ar"))
                 .format(i) +" - "+ oneDuaEvd.mDua*/
             /*val duaStr = NumberFormat.getInstance(Locale.forLanguageTag("ar"))
@@ -56,7 +56,7 @@ class DuaEvdAdapter(private val mDuaEvdList: ArrayList<DuaEvidence>,
                 val typeface = ResourcesCompat.getFont(holder.textViewDua.context, com.itsi.almuntaqimorevn.R.font.uthmanic_hafs1_ver18)
                 holder.textViewDua.typeface = typeface
             } else {
-                val typeface = ResourcesCompat.getFont(holder.textViewDua.context, com.itsi.almuntaqimorevn.R.font.amirifont)
+                val typeface = ResourcesCompat.getFont(holder.textViewDua.context, com.itsi.almuntaqimorevn.R.font.uthman)
                 holder.textViewDua.typeface = typeface
             }
 
@@ -66,7 +66,7 @@ class DuaEvdAdapter(private val mDuaEvdList: ArrayList<DuaEvidence>,
             holder.textViewEvd.visibility = View.VISIBLE
             holder.viewDividerDuaEvd.visibility = View.VISIBLE
 
-            val evidence = MyUtils().parseAndMakeNabiSpeechRed(oneDuaEvd.mEvidence)
+            val evidence = MyUtils().parseAndMakeNabiSpeechRed(holder.textViewDua.context, oneDuaEvd.mEvidence, MyUtils.TEXT_TYPE_EVIDENCE)
             holder.textViewEvd.text = HtmlCompat.fromHtml(evidence, HtmlCompat.FROM_HTML_MODE_LEGACY)
 
             val param = holder.textViewDua.layoutParams as ViewGroup.MarginLayoutParams

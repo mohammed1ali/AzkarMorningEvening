@@ -3,8 +3,8 @@
     <style name="Base.Theme.AsSahihAlMuntaqi" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <item name="android:fontFamily">@font/amirifont</item>
-        <item name="fontFamily">@font/amirifont</item> <!-- target android sdk versions < 26 and > 14 if theme other than AppCompat -->
+        <item name="android:fontFamily">@font/uthman_taha_naskh_regular</item>
+        <item name="fontFamily">@font/uthman_taha_naskh_regular</item> <!-- target android sdk versions < 26 and > 14 if theme other than AppCompat -->
     </style>
 
     <style name="Theme.AsSahihAlMuntaqi" parent="Base.Theme.AsSahihAlMuntaqi" />
