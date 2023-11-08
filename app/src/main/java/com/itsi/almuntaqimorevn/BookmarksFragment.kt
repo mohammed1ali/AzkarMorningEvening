@@ -10,6 +10,7 @@ import com.itsi.almuntaqimorevn.bookmarkslist.BookmarksAdapter
 import com.itsi.almuntaqimorevn.databinding.FragmentBookmarksBinding
 import com.itsi.almuntaqimorevn.model.DuaDb
 import com.itsi.almuntaqimorevn.utils.BkmUtils
+import com.itsi.almuntaqimorevn.utils.MyUtils
 
 class BookmarksFragment : Fragment() {
     private var _binding: FragmentBookmarksBinding? = null
@@ -31,7 +32,8 @@ class BookmarksFragment : Fragment() {
 
         val bookmarkedDuaEvdList = DuaDb().getBookmarkedDuaEvd(bookmarksList)
         if (bookmarkedDuaEvdList.isNotEmpty()) {
-            val adapter = BookmarksAdapter(bookmarkedDuaEvdList)
+            val fontSize = context?.let { MyUtils().getFontSize(it) }
+            val adapter = BookmarksAdapter(bookmarkedDuaEvdList, fontSize?: 24)
             recyclerview.adapter = adapter
             _binding!!.tvNoBookmarks.visibility = View.GONE
         } else {

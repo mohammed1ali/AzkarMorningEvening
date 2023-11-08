@@ -5,6 +5,7 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,26 +25,31 @@ import java.util.Locale
 
 
 class DuaEvdAdapter(private val mDuaEvdList: ArrayList<DuaEvidence>,
-                    private var mBookmarksList: ArrayList<Int>?)
+                    private var mBookmarksList: ArrayList<Int>?, private var mTextSize:Int)
     : RecyclerView.Adapter<DuaEvdAdapter.ViewHolder>() {
 
+    //private lateinit var mHolder:ViewHolder
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.card_view_dua_evd, parent, false)
 
+        //mHolder = ViewHolder(view)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val oneDuaEvd = mDuaEvdList[position]
 
+        holder.textViewDua.setTextSize(TypedValue.COMPLEX_UNIT_SP, mTextSize.toFloat())
+        holder.textViewEvd.setTextSize(TypedValue.COMPLEX_UNIT_SP, (mTextSize-2).toFloat())
+
         if (itemCount==1)
             holder.textViewDua.text = oneDuaEvd.mDua
         else
         {
             val i = position+1
-            val dua = MyUtils().parseAndMakeNabiSpeechRed(holder.textViewDua.context,oneDuaEvd.mDua, MyUtils.TEXT_TYPE_DUA)
+            val dua = MyUtils().parseAndMakeNabiSpeechRed(holder.textViewDua.context, oneDuaEvd.mDua, MyUtils.TEXT_TYPE_DUA)
             /*val duaStr = NumberFormat.getInstance(Locale.forLanguageTag("ar"))
                 .format(i) +" - "+ oneDuaEvd.mDua*/
             /*val duaStr = NumberFormat.getInstance(Locale.forLanguageTag("ar"))
@@ -141,4 +147,13 @@ class DuaEvdAdapter(private val mDuaEvdList: ArrayList<DuaEvidence>,
         val tvDuaNumber: TextView = itemView.findViewById(R.id.tv_dua_no)
         val imgBtnOptions: ImageButton = itemView.findViewById(R.id.btn_options)
     }
+
+    public fun modifyFontSize(fontSizeSp:Int) {
+        mTextSize = fontSizeSp
+        notifyDataSetChanged()
+        //mHolder.textViewDua.setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSizeSp.toFloat())
+        //mHolder.textViewEvd.setTextSize(TypedValue.COMPLEX_UNIT_SP, (fontSizeSp-2).toFloat())
+        //notifyDataSetChanged()
+    }
+
 }

@@ -46,7 +46,7 @@
                 android:id="@+id/btn_options"
                 android:layout_width="wrap_content"
                 android:layout_height="24dp"
-                android:background="@color/white"
+                android:background="@color/backgroung_transparent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

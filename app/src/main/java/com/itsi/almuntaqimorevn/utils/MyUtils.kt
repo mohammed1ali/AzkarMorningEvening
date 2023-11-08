@@ -3,6 +3,7 @@ package com.itsi.almuntaqimorevn.utils
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.content.res.Resources
 import android.os.Build
@@ -120,8 +121,24 @@ class MyUtils {
         clipboard?.setPrimaryClip(clip)
     }
 
-    companion object {
-        val TEXT_TYPE_DUA = 1
-        val TEXT_TYPE_EVIDENCE = 2
+    fun getFontSize(context: Context) : Int {
+        val sh = context.getSharedPreferences("MySharedPref", MODE_PRIVATE)
+        val a = sh.getInt("font_size", 24)
+        return a
     }
+
+    fun saveFontSize(context: Context, fontSize: Int) {
+        val sharedPreferences = context.getSharedPreferences("MySharedPref", MODE_PRIVATE)
+        val myEdit = sharedPreferences.edit()
+
+        myEdit.putInt("font_size", fontSize)
+        myEdit.apply()
+    }
+
+    companion object {
+        const val TEXT_TYPE_DUA = 1
+        const val TEXT_TYPE_EVIDENCE = 2
+    }
+
+
 }

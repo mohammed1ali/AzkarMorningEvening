@@ -11,6 +11,7 @@ import com.itsi.almuntaqimorevn.databinding.FragmentSecondBinding
 import com.itsi.almuntaqimorevn.model.DuaDb
 import com.itsi.almuntaqimorevn.primarylist.DuaEvdAdapter
 import com.itsi.almuntaqimorevn.utils.BkmUtils
+import com.itsi.almuntaqimorevn.utils.MyUtils
 import com.itsi.almuntaqimorevn.viewmodels.SharedViewModel
 
 /**
@@ -20,6 +21,7 @@ class SecondFragment : Fragment() {
 
     private var _binding: FragmentSecondBinding? = null
     private lateinit var viewModel: SharedViewModel
+    private lateinit var mAdapter:DuaEvdAdapter
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -47,11 +49,12 @@ class SecondFragment : Fragment() {
         //supportActionBar.title = DuaDb().getChapterName(chPos)
         val bookmarksList = this.context?.let { BkmUtils().getAllBookmarks(it) }
 
+        val fontSize = this.context?.let { MyUtils().getFontSize(it)}
         // This will pass the ArrayList to our Adapter
-        val adapter = DuaEvdAdapter(duaEvidenceList, bookmarksList)
+        mAdapter = DuaEvdAdapter(duaEvidenceList, bookmarksList, fontSize ?: 24)
 
         // Setting the Adapter with the recyclerview
-        recyclerview.adapter = adapter
+        recyclerview.adapter = mAdapter
 
         //_binding!!.tvDua.setText(duaEvidenceList.toString())
 
@@ -74,5 +77,13 @@ class SecondFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    public fun onFontSizeModified(fontSize: Int) {
+        mAdapter?.let {
+            it.modifyFontSize(fontSize)
+            //it.notifyDataSetChanged()
+            context?.let { it1 -> MyUtils().saveFontSize(it1, fontSize) }
+        }
     }
 }

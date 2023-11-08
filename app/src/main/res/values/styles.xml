@@ -31,8 +31,8 @@
     <style name="BodyMaterialAlertDialog.MaterialComponents.Body.Text" parent="MaterialAlertDialog.MaterialComponents.Body.Text">
         <item name="android:titleTextStyle">@style/MaterialADTitle</item>
         <item name="android:textSize">20sp</item>
-        <item name="android:fontFamily">@font/amirifont</item>
-        <item name="fontFamily">@font/amirifont</item>
+        <item name="android:fontFamily">@font/uthman_taha_naskh_regular</item>
+        <item name="fontFamily">@font/uthman_taha_naskh_regular</item>
         <!--<item name="android:textColor">@color/colorAccent</item>
         <item name="android:textAllCaps">true</item>
 

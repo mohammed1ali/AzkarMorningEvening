@@ -8,6 +8,7 @@
     android:paddingStart="16dp"
     android:paddingEnd="16dp"
     android:layout_width="match_parent"
+    android:background="@color/backgroung_general"
     android:layout_height="match_parent">
 
     <TextView
@@ -19,6 +20,8 @@
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackgroundBorderless"
         android:text="@string/share"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -35,6 +38,8 @@
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackgroundBorderless"
         android:text="@string/bookmark"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_btmsht_share"
@@ -52,6 +57,8 @@
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackgroundBorderless"
         android:text="@string/copy"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_btmsht_bookmark"

@@ -1,5 +1,6 @@
 package com.itsi.almuntaqimorevn.bookmarkslist
 
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +19,7 @@ import com.itsi.almuntaqimorevn.utils.MyUtils
 import java.text.NumberFormat
 import java.util.Locale
 
-class BookmarksAdapter(private var mBookmarkedDuaEvdList: ArrayList<DuaEvidence>) :
+class BookmarksAdapter(private var mBookmarkedDuaEvdList: ArrayList<DuaEvidence>,  private var mTextSize:Int) :
     RecyclerView.Adapter<BookmarksAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -28,6 +29,9 @@ class BookmarksAdapter(private var mBookmarkedDuaEvdList: ArrayList<DuaEvidence>
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val oneDuaEvd = mBookmarkedDuaEvdList[position]
+
+        holder.textViewDua.setTextSize(TypedValue.COMPLEX_UNIT_SP, mTextSize.toFloat())
+        holder.textViewEvd.setTextSize(TypedValue.COMPLEX_UNIT_SP, (mTextSize-2).toFloat())
 
         if (itemCount==1) {
             holder.tvDuaNumber.text = NumberFormat.getInstance(Locale.forLanguageTag("ar"))

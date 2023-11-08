@@ -4,6 +4,8 @@
     <color name="txt_dua">#FFFFFF</color>
     <color name="txt_evidence">#DDDDDD</color>
 
-    <color name="txt_nabi_speech">#CBEFFF</color>
-    <color name="txt_nabi_speech_evd">#A7E4FF</color>
+    <color name="txt_nabi_speech">#FFFFFF</color>
+    <color name="txt_nabi_speech_evd">#EBF9FF</color>
+
+    <color name="backgroung_general">#000000</color>
 </resources>

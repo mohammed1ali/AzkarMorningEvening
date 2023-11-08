@@ -33,5 +33,6 @@
     <string name="dialog_author_desc">https://t.me/AbulYamman \n https://t.me/Abulyammaneng</string>
     <string name="website_txt">موقع إلكتروني</string>
     <string name="website_shaykh"></string>
+    <string name="action_change_font_size">Change font size</string>
 
 </resources>
