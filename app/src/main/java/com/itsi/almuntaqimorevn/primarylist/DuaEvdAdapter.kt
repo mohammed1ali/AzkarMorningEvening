@@ -129,7 +129,7 @@ class DuaEvdAdapter(private val mDuaEvdList: ArrayList<DuaEvidence>,
                 bt.dismiss()
 
                 MyUtils().copyToClipboard(oneDuaEvd.mDua + "\n" + oneDuaEvd.mEvidence, it.context)
-                Toast.makeText(it.context, it.context.getString(R.string.copied), Toast.LENGTH_SHORT).show()
+                Toast.makeText(it.context, it.context.getString(R.string.copied_to_clipboard), Toast.LENGTH_SHORT).show()
             }
             bt.setContentView(view)
             bt.show()

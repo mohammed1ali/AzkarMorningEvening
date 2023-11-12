@@ -27,10 +27,11 @@
 
     <style name="Body_ThemeOverlay.MaterialComponents.MaterialAlertDialog" parent="@style/ThemeOverlay.MaterialComponents.MaterialAlertDialog">
         <item name="materialAlertDialogBodyTextStyle">@style/BodyMaterialAlertDialog.MaterialComponents.Body.Text</item>
+        <item name="materialAlertDialogTitleTextStyle">@style/MyMaterialAlertDialogTitle</item>
     </style>
     <style name="BodyMaterialAlertDialog.MaterialComponents.Body.Text" parent="MaterialAlertDialog.MaterialComponents.Body.Text">
-        <item name="android:titleTextStyle">@style/MaterialADTitle</item>
-        <item name="android:textSize">20sp</item>
+        <!--<item name="android:titleTextStyle">@style/MaterialADTitle</item>-->
+        <item name="android:textSize">24sp</item>
         <item name="android:fontFamily">@font/uthman_taha_naskh_regular</item>
         <item name="fontFamily">@font/uthman_taha_naskh_regular</item>
         <!--<item name="android:textColor">@color/colorAccent</item>
@@ -39,8 +40,14 @@
         <item name="android:textStyle">bold</item>-->
     </style>
 
-    <style name="MaterialADTitle">
-        <item name="android:textSize">22sp</item>
+    <!--<style name="MaterialADTitle">
+        <item name="android:textSize">24sp</item>
+    </style>-->
+    <style name="MyMaterialAlertDialogTitle" parent="@style/MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="android:textAppearance">@style/MyTitle_TextAppearance</item>
+    </style>
+    <style name="MyTitle_TextAppearance" parent="@style/TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:textSize">24sp</item>
     </style>
 
 </resources>

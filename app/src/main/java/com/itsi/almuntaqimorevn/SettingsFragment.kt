@@ -3,14 +3,18 @@ package com.itsi.almuntaqimorevn
 import android.content.ActivityNotFoundException
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
+import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -31,9 +35,11 @@ class SettingsFragment : Fragment() {
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
 
         val shareTv = binding.tvShareApp
+        val sourceTv = binding.tvSource
         val contactEmailTv = binding.tvContactEmail
         val introductionTv = binding.tvIntroduction
         val authorDescTv = binding.tvAuthorDesc
+        val lightNightSwitch = binding.switchNightMode
 
         shareTv.setOnClickListener {
             try {
@@ -47,6 +53,23 @@ class SettingsFragment : Fragment() {
             } catch (e: Exception) {
                 e.printStackTrace()
             }
+        }
+
+
+        sourceTv.setOnClickListener {
+            val view: View = layoutInflater.inflate(R.layout.dialog_app_source, null)
+            val sourceDialogMsgTv = view.findViewById<TextView>(R.id.tv_source_dialog_message)
+            sourceDialogMsgTv.text = HtmlCompat.fromHtml( "Baab morning and evening from the book ... <a href=\"http://www.google.com\">http://www.google.com</a> "
+                , HtmlCompat.FROM_HTML_MODE_LEGACY)
+            sourceDialogMsgTv.movementMethod = LinkMovementMethod.getInstance()
+
+            val dialog = MaterialAlertDialogBuilder(it.context, R.style.Body_ThemeOverlay_MaterialComponents_MaterialAlertDialog)
+                .setTitle("Source")
+                .setView(view)
+                .setNeutralButton(resources.getString(R.string.ok)) { dialog, which ->
+                    // Respond to neutral button press
+                    dialog.dismiss()
+                }.show()
         }
 
 
@@ -101,7 +124,7 @@ class SettingsFragment : Fragment() {
 
         authorDescTv.setOnClickListener{
             var authorDesc = "<b>" + resources.getString(R.string.author_name) + "</b> "+
-                    "\n" + resources.getString(R.string.dialog_author_desc)
+                    "<br/>" + resources.getString(R.string.dialog_author_desc)
             val dialog = MaterialAlertDialogBuilder(it.context, R.style.Body_ThemeOverlay_MaterialComponents_MaterialAlertDialog)
                 .setTitle(resources.getString(R.string.author))
                 .setMessage(HtmlCompat.fromHtml(authorDesc, HtmlCompat.FROM_HTML_MODE_LEGACY))
@@ -109,8 +132,33 @@ class SettingsFragment : Fragment() {
                     // Respond to neutral button press
                     dialog.dismiss()
                 }.show()
+            dialog.findViewById<TextView>(android.R.id.message)?.movementMethod = LinkMovementMethod.getInstance()
+        }
+        authorDescTv.movementMethod = LinkMovementMethod.getInstance()
+
+
+        when (context?.resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)) {
+            Configuration.UI_MODE_NIGHT_YES -> { lightNightSwitch.isChecked = true}
+            Configuration.UI_MODE_NIGHT_NO -> { lightNightSwitch.isChecked = false}
+            else -> { lightNightSwitch.isChecked = false}
+        }
+
+        lightNightSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
+            if(isChecked) {
+                changeToDarkMode()
+            } else {
+                changeToLightMode()
+            }
         }
 
         return binding.root
+    }
+
+    private fun changeToLightMode() {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+    }
+
+    private fun changeToDarkMode() {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
     }
 }

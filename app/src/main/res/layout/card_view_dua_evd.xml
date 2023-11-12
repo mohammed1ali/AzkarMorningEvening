@@ -63,6 +63,7 @@
         android:paddingTop="2dp"
         android:textSize="24sp"
         android:textColor="@color/txt_dua"
+        android:textIsSelectable="true"
         android:text="TextView" />
 
         <View
@@ -78,6 +79,7 @@
         android:gravity="center_horizontal"
         android:textSize="20sp"
         android:textColor="@color/txt_evidence"
+        android:textIsSelectable="true"
         android:text="TextView" />
 
 </LinearLayout>
