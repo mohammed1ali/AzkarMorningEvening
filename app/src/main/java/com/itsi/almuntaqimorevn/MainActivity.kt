@@ -1,15 +1,20 @@
 package com.itsi.almuntaqimorevn
 
 import android.content.Context
+import android.content.res.Configuration
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.Window
+import android.view.WindowInsetsController
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -25,6 +30,7 @@ import com.itsi.almuntaqimorevn.databinding.ActivityMainBinding
 import com.itsi.almuntaqimorevn.utils.MyContextWrapper
 import com.itsi.almuntaqimorevn.utils.MyUtils
 import com.itsi.almuntaqimorevn.viewmodels.SharedViewModel
+import java.text.NumberFormat
 import java.util.Locale
 
 
@@ -39,6 +45,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         WindowCompat.setDecorFitsSystemWindows(window, false)
+        val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
 
         //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
@@ -53,6 +60,13 @@ class MainActivity : AppCompatActivity() {
             supportActionBar?.title = item
             // Update the UI using new item data
         })
+
+
+        when (resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
+            Configuration.UI_MODE_NIGHT_YES -> { /* dO NOTHING lightNightSwitch.isChecked = true*/}
+            Configuration.UI_MODE_NIGHT_NO -> { this.window.setNavigationBarDarkIcons(true) /*lightNightSwitch.isChecked = false*/ }
+            else -> { this.window.setNavigationBarDarkIcons(true) /*lightNightSwitch.isChecked = false*/}
+        }
 
     }
 
@@ -135,11 +149,13 @@ class MainActivity : AppCompatActivity() {
         var fontSize = MyUtils().getFontSize(this)
 
         val tvEditFontSize = view.findViewById<TextView>(R.id.tv_editable_font_size) as TextView
-        tvEditFontSize.text = fontSize.toString()
+        tvEditFontSize.text = NumberFormat.getInstance(Locale.forLanguageTag("ar"))
+            .format(fontSize)
 
         view.findViewById<ImageButton>(R.id.ibutton_increase_size).setOnClickListener {
             if(fontSize<60) {
-                tvEditFontSize.text = (++fontSize).toString()
+                tvEditFontSize.text = NumberFormat.getInstance(Locale.forLanguageTag("ar"))
+                    .format(++fontSize)
                 val navHostFragment = supportFragmentManager
                     .findFragmentById(R.id.nav_host_fragment_content_main) as NavHostFragment
                 val currentFragment = navHostFragment.childFragmentManager.fragments[0]
@@ -149,7 +165,8 @@ class MainActivity : AppCompatActivity() {
 
         view.findViewById<ImageButton>(R.id.ibutton_reduce_size).setOnClickListener {
             if(fontSize>10) {
-                tvEditFontSize.text = (--fontSize).toString()
+                tvEditFontSize.text = NumberFormat.getInstance(Locale.forLanguageTag("ar"))
+                    .format(--fontSize)
                 val navHostFragment = supportFragmentManager
                     .findFragmentById(R.id.nav_host_fragment_content_main) as NavHostFragment
                 val currentFragment = navHostFragment.childFragmentManager.fragments[0]
@@ -183,5 +200,25 @@ class MainActivity : AppCompatActivity() {
 
     override fun attachBaseContext(newBase: Context) {
         super.attachBaseContext(MyContextWrapper.wrap(newBase, "ar"))
+    }
+}
+
+@Suppress("DEPRECATION")
+fun Window.setNavigationBarDarkIcons(dark: Boolean) {
+    when {
+        Build.VERSION_CODES.R <= Build.VERSION.SDK_INT -> insetsController?.setSystemBarsAppearance(
+            if (dark) WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS else 0,
+            WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS
+        )
+        Build.VERSION_CODES.O <= Build.VERSION.SDK_INT -> decorView.systemUiVisibility = if (dark) {
+            decorView.systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+        } else {
+            decorView.systemUiVisibility and View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR.inv()
+        }
+        else -> if (dark) {
+            // dark navigation bar icons not supported on API level below 26, set navigation bar
+            // color to black to keep icons visible
+            navigationBarColor = Color.BLACK
+        }
     }
 }

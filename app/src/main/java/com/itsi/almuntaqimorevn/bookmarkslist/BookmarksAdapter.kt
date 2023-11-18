@@ -19,7 +19,7 @@ import com.itsi.almuntaqimorevn.utils.MyUtils
 import java.text.NumberFormat
 import java.util.Locale
 
-class BookmarksAdapter(private var mBookmarkedDuaEvdList: ArrayList<DuaEvidence>,  private var mTextSize:Int) :
+class BookmarksAdapter(private var mBookmarkedDuaEvdList: ArrayList<DuaEvidence>, private var mTextSize:Int, private var mOnBookmarksEmptyListener: OnBookmarksEmptyListener) :
     RecyclerView.Adapter<BookmarksAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -36,8 +36,20 @@ class BookmarksAdapter(private var mBookmarkedDuaEvdList: ArrayList<DuaEvidence>
         if (itemCount==1) {
             holder.tvDuaNumber.text = NumberFormat.getInstance(Locale.forLanguageTag("ar"))
                 .format(oneDuaEvd.mId)
-            holder.textViewDua.text = oneDuaEvd.mDua
+            //holder.textViewDua.text = oneDuaEvd.mDua
             holder.textViewEvd.text = oneDuaEvd.mEvidence
+
+            val dua = MyUtils().parseAndMakeNabiSpeechRed(holder.textViewDua.context, oneDuaEvd.mDua, MyUtils.TEXT_TYPE_DUA)
+            if (oneDuaEvd.mQuranic) {
+                val typeface = ResourcesCompat.getFont(holder.textViewDua.context, com.itsi.almuntaqimorevn.R.font.uthmanic_hafs1_ver18)
+                holder.textViewDua.typeface = typeface
+            } else {
+                val typeface = ResourcesCompat.getFont(holder.textViewDua.context, com.itsi.almuntaqimorevn.R.font.uthman_taha_naskh_regular)
+                holder.textViewDua.typeface = typeface
+            }
+
+            holder.textViewDua.text = HtmlCompat.fromHtml(dua, HtmlCompat.FROM_HTML_MODE_LEGACY)
+
         }
         else
         {
@@ -51,7 +63,7 @@ class BookmarksAdapter(private var mBookmarkedDuaEvdList: ArrayList<DuaEvidence>
                 val typeface = ResourcesCompat.getFont(holder.textViewDua.context, com.itsi.almuntaqimorevn.R.font.uthmanic_hafs1_ver18)
                 holder.textViewDua.typeface = typeface
             } else {
-                val typeface = ResourcesCompat.getFont(holder.textViewDua.context, com.itsi.almuntaqimorevn.R.font.uthman)
+                val typeface = ResourcesCompat.getFont(holder.textViewDua.context, com.itsi.almuntaqimorevn.R.font.uthman_taha_naskh_regular)
                 holder.textViewDua.typeface = typeface
             }
 
@@ -109,6 +121,14 @@ class BookmarksAdapter(private var mBookmarkedDuaEvdList: ArrayList<DuaEvidence>
                 val bookmarksList = BkmUtils().getAllBookmarks(it.context)
                 mBookmarkedDuaEvdList = DuaDb().getBookmarkedDuaEvd(bookmarksList)
                 notifyItemRemoved(position)
+
+                try {
+                    if(itemCount==0) {
+                        mOnBookmarksEmptyListener.onBookmarksEmpty()
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
                 /*if(mBookmarksList?.contains(position+1) == true) {
                     BkmUtils().removeBookmark(position+1, it.context)
                     Toast.makeText(it.context, it.context.getString(R.string.bookmark_removed),
@@ -142,5 +162,9 @@ class BookmarksAdapter(private var mBookmarkedDuaEvdList: ArrayList<DuaEvidence>
         val viewDividerDuaEvd: View = itemView.findViewById(R.id.divider_dua_evd)
         val tvDuaNumber: TextView = itemView.findViewById(R.id.tv_dua_no)
         val imgBtnOptions: ImageButton = itemView.findViewById(R.id.btn_options)
+    }
+
+    public interface OnBookmarksEmptyListener {
+        fun onBookmarksEmpty()
     }
 }

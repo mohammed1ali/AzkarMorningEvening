@@ -62,7 +62,7 @@ class DuaEvdAdapter(private val mDuaEvdList: ArrayList<DuaEvidence>,
                 val typeface = ResourcesCompat.getFont(holder.textViewDua.context, com.itsi.almuntaqimorevn.R.font.uthmanic_hafs1_ver18)
                 holder.textViewDua.typeface = typeface
             } else {
-                val typeface = ResourcesCompat.getFont(holder.textViewDua.context, com.itsi.almuntaqimorevn.R.font.uthman)
+                val typeface = ResourcesCompat.getFont(holder.textViewDua.context, com.itsi.almuntaqimorevn.R.font.uthman_taha_naskh_regular)
                 holder.textViewDua.typeface = typeface
             }
 

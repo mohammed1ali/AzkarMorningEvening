@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/tv_author_desc_dialog_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="22sp"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_msg_below_author_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="Telegram"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="@+id/tv_author_desc_dialog_message"
+        app:layout_constraintStart_toStartOf="@+id/tv_author_desc_dialog_message"
+        app:layout_constraintTop_toBottomOf="@+id/tv_author_desc_dialog_message" />
+
+    <ImageView
+        android:id="@+id/imageView_telegram"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/telegram_24"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_msg_below_author_desc"
+        app:layout_constraintEnd_toStartOf="@+id/tv_msg_below_author_desc"
+        app:layout_constraintTop_toTopOf="@+id/tv_msg_below_author_desc"
+         />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

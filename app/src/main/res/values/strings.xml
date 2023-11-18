@@ -20,20 +20,30 @@
     <string name="share_using">يشارك</string>
     <string name="remove_bookmark">حذف مرجعية</string>
     <string name="bookmark_removed">Bookmark removed</string>
-    <string name="bookmark_added">Bookmark added</string>
+    <string name="bookmark_added">يتم إضافة إشارة مرجعية</string>
     <string name="copied_to_clipboard">تم النسخ</string>
 
     <string name="introduction">مقدمة</string>
-    <string name="dialog_introduction_title">مقدمة الناصح الأمين يحيى بن علي الحجوري حفظه الله</string>
-    <string name="dialog_introduction_body">الحمد لله كثيرًا، وبعد: \nفقد طالعت رسالة «الصحيح المنتقى من أذكار المصطفى» لأخينا الفاضل الشيخ عدنان بن حسين المصقري، فرأيتها رسالة مفيدة في بابها، جمع فيها أخونا عدنان جمعًا حسنًا مباركًا قلَّ أن تجده في مختصر مثل هذا مع تحري الصحة - حسب شرطه اعتمادًا على أحكام أهل الحديث على ما ذكره منها مما ليس في الصحيحين أو أحدهما - فجزاه الله خيرًا. \n    كتبه يحيى بن علي الحجوري/ 7/ رجب/  1429هــ\n</string>
+    <string name="dialog_introduction_title">مقدمة الناصح الأمين &lt;b> يحيى بن علي الحجوري &lt;/b> حفظه الله</string>
+    <string name="dialog_introduction_body">الحمد لله كثيرًا، وبعد: فقد طالعت رسالة &lt;b> «&lt;font color=\'#D2042D\'>الصحيح المنتقى من أذكار المصطفى&lt;/font>» &lt;/b> لأخينا الفاضل الشيخ عدنان بن حسين المصقري، فرأيتها رسالة مفيدة في بابها، جمع فيها أخونا عدنان جمعًا حسنًا مباركًا قلَّ أن تجده في مختصر مثل هذا مع تحري الصحة - حسب شرطه اعتمادًا على أحكام أهل الحديث على ما ذكره منها مما ليس في الصحيحين أو أحدهما - فجزاه الله خيرًا.  &lt;br>   &lt;b>كتبه يحيى بن علي الحجوري/ 7/ رجب/  1429هــ&lt;/b></string>
     <string name="ok">موافق</string>
     <string name="cancel">إلغاء</string>
 
     <string name="author">المؤلف</string>
-    <string name="author_name">أبي اليمان عدنان بن حسين المصقري</string>
+    <string name="author_name">أبي اليمان عدنان بن حسين المصقري حفظه الله</string>
     <string name="dialog_author_desc"> <a href="https://t.me/AbulYamman">https://t.me/AbulYamman</a> <br/> https://t.me/Abulyammaneng</string>
     <string name="website_txt">موقع إلكتروني</string>
     <string name="website_shaykh"></string>
-    <string name="action_change_font_size">Change font size</string>
+    <string name="action_change_font_size">تغيير حجم الخط</string>
+    <string name="source">المصدر</string>
+    <string name="dark_mode">وضع الليلي</string>
+    <string name="light_mode">وضع الإضاءة</string>
+    <string name="contact_us">اتصل بنا</string>
+    <string name="no_bookmarks">لا توجد مختارات</string>
+    <string name="your_feedback">ملاحظاتك</string>
+    <string name="your_name">إسمك</string>
+    <string name="source_text">باب الأذكار الصحيحة عن رسول الله ﷺ من أذكار الصباح والمساء &lt;br> من الكتاب &lt;br> &lt;a href="https://drive.google.com/file/d/1fv1wDq2kvZI46fK-sh1PMWn8vGTjt_7o/view?usp=sharing"> الصحيح المنتقى من أذكار المصطفى &lt;/a> &lt;br> جمع &lt;br>  &lt;b>أبي اليمان عدنان بن حسين المصقري &lt;/b> حفظه الله  </string>
+    <string name="telegram">Telegram</string>
+    <string name="telegram_channel">&lt;a href="https://telegram.me/AbulYamman/">القناة العامة لجهود الشيخ أبي اليمان والفتاوى والدروس بالعربية &lt;/a>  &lt;br>  &lt;a href="http://t.me/Abulyammaneng/">قناة على التيليجرام باللغة الإنجليزية &lt;/a>  </string>
 
 </resources>

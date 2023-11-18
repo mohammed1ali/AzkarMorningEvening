@@ -5,7 +5,7 @@
     android:layout_marginTop="16dp"
     android:layout_marginStart="8dp"
     android:layout_marginEnd="8dp"
-    android:layout_marginBottom="80dp"
+    android:layout_marginBottom="100dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -25,10 +25,10 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <!--<androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-        <!-- Media -->
+        &lt;!&ndash; Media &ndash;&gt;
                 <ImageView
                     android:id="@+id/cv_img"
                     android:layout_width="wrap_content"
@@ -46,7 +46,7 @@
                     app:layout_constraintStart_toEndOf="@id/cv_img"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
+-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -63,38 +63,41 @@
             android:clickable="true"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackgroundBorderless"
-            app:drawableStartCompat="@drawable/ic_share_24"
+            app:drawableStartCompat="@drawable/ic_share_blue"
             android:drawablePadding="16dp"
             android:paddingStart="16dp"
+            android:layout_margin="8dp"
             />
 
             <TextView
                 android:id="@+id/tv_source"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Source"
+                android:text="@string/source"
                 android:textSize="22sp"
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackgroundBorderless"
-                app:drawableStartCompat="@drawable/ic_share_24"
+                app:drawableStartCompat="@drawable/ic_stack_books"
                 android:drawablePadding="16dp"
                 android:paddingStart="16dp"
+                android:layout_margin="8dp"
                 />
 
             <TextView
                 android:id="@+id/tv_contact_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Contact us"
+                android:text="@string/contact_us"
                 android:textSize="22sp"
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackgroundBorderless"
 
-                app:drawableStartCompat="@drawable/ic_more_horiz"
+                app:drawableStartCompat="@drawable/ic_mail"
                 android:drawablePadding="16dp"
                 android:paddingStart="16dp"
+                android:layout_margin="8dp"
                 />
 
             <TextView
@@ -107,9 +110,10 @@
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackgroundBorderless"
 
-                app:drawableStartCompat="@drawable/ic_share_24"
+                app:drawableStartCompat="@drawable/ic_info"
                 android:drawablePadding="16dp"
                 android:paddingStart="16dp"
+                android:layout_margin="8dp"
                 />
 
             <TextView
@@ -122,22 +126,24 @@
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackgroundBorderless"
 
-                app:drawableStartCompat="@drawable/ic_share_24"
+                app:drawableStartCompat="@drawable/ic_writer"
                 android:drawablePadding="16dp"
                 android:paddingStart="16dp"
+                android:layout_margin="8dp"
                 />
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_margin="8dp"
                 >
 
                 <TextView
                     android:id="@+id/tv_switch_light_mode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Light Mode"
+                    android:text="@string/light_mode"
                     android:textSize="22sp"
                     android:layout_weight="1"
                     android:layout_gravity="center"
@@ -154,7 +160,7 @@
                     android:id="@+id/tv_switch_dark_mode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dark Mode"
+                    android:text="@string/dark_mode"
                     android:textSize="22sp"
                     android:layout_weight="1"
                     android:layout_gravity="center"

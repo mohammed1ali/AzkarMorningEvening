@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:padding="8dp"
     tools:context=".BookmarksFragment"
-    android:layout_marginBottom="?actionBarSize"
+    android:id="@+id/cl_bookmarks"
     >
 
     <androidx.recyclerview.widget.RecyclerView
@@ -20,8 +20,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="No Bookmarks yet"
+        android:text="@string/no_bookmarks"
         android:textColor="@color/txt_general"
+        android:textSize="24sp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

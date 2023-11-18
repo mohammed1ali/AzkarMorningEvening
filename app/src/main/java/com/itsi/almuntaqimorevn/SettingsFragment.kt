@@ -46,7 +46,7 @@ class SettingsFragment : Fragment() {
                 val shareIntent = Intent(Intent.ACTION_SEND)
                 shareIntent.type = "text/plain"
                 shareIntent.putExtra(Intent.EXTRA_SUBJECT, context?.getString(R.string.app_name))
-                var shareMessage = "\nLet me recommend you this application\n\n"
+                var shareMessage = getString(R.string.share_app) + "\n\n"
                 shareMessage = "$shareMessage https://play.google.com/store/apps/details?id=${BuildConfig.APPLICATION_ID}"
                 shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage)
                 startActivity(Intent.createChooser(shareIntent, "choose one"))
@@ -59,12 +59,12 @@ class SettingsFragment : Fragment() {
         sourceTv.setOnClickListener {
             val view: View = layoutInflater.inflate(R.layout.dialog_app_source, null)
             val sourceDialogMsgTv = view.findViewById<TextView>(R.id.tv_source_dialog_message)
-            sourceDialogMsgTv.text = HtmlCompat.fromHtml( "Baab morning and evening from the book ... <a href=\"http://www.google.com\">http://www.google.com</a> "
-                , HtmlCompat.FROM_HTML_MODE_LEGACY)
             sourceDialogMsgTv.movementMethod = LinkMovementMethod.getInstance()
+            sourceDialogMsgTv.text = HtmlCompat.fromHtml(
+                getString(R.string.source_text), HtmlCompat.FROM_HTML_MODE_LEGACY)
 
             val dialog = MaterialAlertDialogBuilder(it.context, R.style.Body_ThemeOverlay_MaterialComponents_MaterialAlertDialog)
-                .setTitle("Source")
+                .setTitle(getString(R.string.source))
                 .setView(view)
                 .setNeutralButton(resources.getString(R.string.ok)) { dialog, which ->
                     // Respond to neutral button press
@@ -80,11 +80,11 @@ class SettingsFragment : Fragment() {
             val alertDialog: AlertDialog = AlertDialog.Builder(it.context).create()
             alertDialog.setTitle("اتصل بنا")
             //alertDialog.setIcon("Icon id here")
-            alertDialog.setCancelable(false)
+            //alertDialog.setCancelable(false)
 
             val etFeedback = view.findViewById<View>(R.id.et_feedback) as TextInputEditText
             alertDialog.setButton(
-                AlertDialog.BUTTON_POSITIVE, "تمام", DialogInterface.OnClickListener{ dialog, which ->
+                AlertDialog.BUTTON_POSITIVE, getString(R.string.ok), DialogInterface.OnClickListener{ dialog, which ->
 
                     val intent = Intent(Intent.ACTION_SENDTO)
                     //intent.type = "message/rfc822"      // Type("message/rfc822") so it won't show you all of the apps that support the send intent.
@@ -102,9 +102,9 @@ class SettingsFragment : Fragment() {
                 }
             )
             alertDialog.setButton(
-                AlertDialog.BUTTON_NEGATIVE, "إلغاء", DialogInterface.OnClickListener{ dialog, which ->
+                AlertDialog.BUTTON_NEGATIVE, getString(R.string.cancel), DialogInterface.OnClickListener{ dialog, which ->
                     alertDialog.dismiss()
-                    Toast.makeText(it.context,"clicked no",Toast.LENGTH_LONG).show()
+                    //Toast.makeText(it.context,"clicked no",Toast.LENGTH_LONG).show()
                 }
             )
             alertDialog.setView(view);
@@ -112,18 +112,58 @@ class SettingsFragment : Fragment() {
         }
 
         introductionTv.setOnClickListener {
+            val view: View = layoutInflater.inflate(R.layout.dialog_introduction, null)
+            val introductionDialogMsgTv = view.findViewById<TextView>(R.id.tv_introduction_dialog_message)
+            introductionDialogMsgTv.movementMethod = LinkMovementMethod.getInstance()
+            introductionDialogMsgTv.text = HtmlCompat.fromHtml(
+                getString(R.string.dialog_introduction_body), HtmlCompat.FROM_HTML_MODE_LEGACY)
+
             val dialog = MaterialAlertDialogBuilder(it.context, R.style.Body_ThemeOverlay_MaterialComponents_MaterialAlertDialog)
+                .setTitle(HtmlCompat.fromHtml(
+                    getString(R.string.dialog_introduction_title), HtmlCompat.FROM_HTML_MODE_LEGACY))
+                .setView(view)
+                .setNeutralButton(resources.getString(R.string.ok)) { dialog, which ->
+                    // Respond to neutral button press
+                    dialog.dismiss()
+                }.show()
+
+
+            /*val dialog1 = MaterialAlertDialogBuilder(it.context, R.style.Body_ThemeOverlay_MaterialComponents_MaterialAlertDialog)
                 .setTitle(resources.getString(R.string.dialog_introduction_title))
                 .setMessage(resources.getString(R.string.dialog_introduction_body))
 
                 .setNeutralButton(resources.getString(R.string.ok)) { dialog, which ->
                     // Respond to neutral button press
                     dialog.dismiss()
-                }.show()
+                }.show()*/
         }
 
         authorDescTv.setOnClickListener{
-            var authorDesc = "<b>" + resources.getString(R.string.author_name) + "</b> "+
+            val view: View = layoutInflater.inflate(R.layout.dialog_author_desc, null)
+            val authorDescDialogMsgTv = view.findViewById<TextView>(R.id.tv_author_desc_dialog_message)
+            val msgBelowDescDialogMsgTv = view.findViewById<TextView>(R.id.tv_msg_below_author_desc)
+
+            authorDescDialogMsgTv.movementMethod = LinkMovementMethod.getInstance()
+            authorDescDialogMsgTv.text = HtmlCompat.fromHtml(
+                getString(R.string.author_name), HtmlCompat.FROM_HTML_MODE_LEGACY)
+
+            msgBelowDescDialogMsgTv.movementMethod = LinkMovementMethod.getInstance()
+            msgBelowDescDialogMsgTv.text = HtmlCompat.fromHtml(
+                getString(R.string.telegram_channel), HtmlCompat.FROM_HTML_MODE_LEGACY)
+
+            val dialog = MaterialAlertDialogBuilder(it.context, R.style.Body_ThemeOverlay_MaterialComponents_MaterialAlertDialog)
+                .setTitle(HtmlCompat.fromHtml(
+                    getString(R.string.author), HtmlCompat.FROM_HTML_MODE_LEGACY))
+                .setView(view)
+                .setNeutralButton(resources.getString(R.string.ok)) { dialog, which ->
+                    // Respond to neutral button press
+                    dialog.dismiss()
+                }.show()
+
+
+
+
+            /*var authorDesc = "<b>" + resources.getString(R.string.author_name) + "</b> "+
                     "<br/>" + resources.getString(R.string.dialog_author_desc)
             val dialog = MaterialAlertDialogBuilder(it.context, R.style.Body_ThemeOverlay_MaterialComponents_MaterialAlertDialog)
                 .setTitle(resources.getString(R.string.author))
@@ -132,9 +172,9 @@ class SettingsFragment : Fragment() {
                     // Respond to neutral button press
                     dialog.dismiss()
                 }.show()
-            dialog.findViewById<TextView>(android.R.id.message)?.movementMethod = LinkMovementMethod.getInstance()
+            dialog.findViewById<TextView>(android.R.id.message)?.movementMethod = LinkMovementMethod.getInstance()*/
         }
-        authorDescTv.movementMethod = LinkMovementMethod.getInstance()
+        //authorDescTv.movementMethod = LinkMovementMethod.getInstance()
 
 
         when (context?.resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)) {
