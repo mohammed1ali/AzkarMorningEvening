@@ -74,14 +74,14 @@ class MyUtils {
             duaString = StringBuilder(duaString)
                 .insert(index+1, "<font color='" + color.toString() + "'>").toString()
             index = duaString.indexOf(startRedSymbol, index + 1)
-            Log.d("MATCHER $index", duaString)
+            //Log.d("MATCHER $index", duaString)
         }
 
         index = duaString.indexOf(endRedSymbol)
         while (index != -1) {
             duaString = StringBuilder(duaString).insert(index+1, "</font>").toString()
             index = duaString.indexOf(endRedSymbol, index + 1)
-            Log.d("MATCHER $index", duaString)
+            //Log.d("MATCHER $index", duaString)
         }
 
 
@@ -97,7 +97,7 @@ class MyUtils {
             duaString = StringBuilder(duaString).insert(index, "</font>").toString()
             Log.d("MATCHER2", duaString)
         }*/
-        Log.d("DUASTRING", duaString)
+        //Log.d("DUASTRING", duaString)
         return duaString
     }
 
@@ -121,10 +121,9 @@ class MyUtils {
         clipboard?.setPrimaryClip(clip)
     }
 
-    fun getFontSize(context: Context) : Int {
+    fun getFontSize(context: Context): Int {
         val sh = context.getSharedPreferences("MySharedPref", MODE_PRIVATE)
-        val a = sh.getInt("font_size", 24)
-        return a
+        return sh.getInt("font_size", 24)
     }
 
     fun saveFontSize(context: Context, fontSize: Int) {

@@ -3,8 +3,12 @@ package com.itsi.almuntaqimorevn
 import android.content.Context
 import android.content.res.Configuration
 import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.TypefaceSpan
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
@@ -14,7 +18,7 @@ import android.view.WindowInsetsController
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -27,6 +31,8 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.itsi.almuntaqimorevn.databinding.ActivityMainBinding
+import com.itsi.almuntaqimorevn.model.DuaDb
+import com.itsi.almuntaqimorevn.model.DuaEvidence
 import com.itsi.almuntaqimorevn.utils.MyContextWrapper
 import com.itsi.almuntaqimorevn.utils.MyUtils
 import com.itsi.almuntaqimorevn.viewmodels.SharedViewModel
@@ -39,16 +45,19 @@ import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var mDuaEvidenceList: ArrayList<DuaEvidence>
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: SharedViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         WindowCompat.setDecorFitsSystemWindows(window, false)
-        val splashScreen = installSplashScreen()
+        //val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
 
         //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        val chPos = 0
+        mDuaEvidenceList = DuaDb().getDuaEvidenceList(chPos)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -67,10 +76,11 @@ class MainActivity : AppCompatActivity() {
             Configuration.UI_MODE_NIGHT_NO -> { this.window.setNavigationBarDarkIcons(true) /*lightNightSwitch.isChecked = false*/ }
             else -> { this.window.setNavigationBarDarkIcons(true) /*lightNightSwitch.isChecked = false*/}
         }
-
     }
 
     private fun setupActionNBottomNavBarNNavController() {
+
+        binding.toolbar.isTitleCentered = true
         setSupportActionBar(binding.toolbar)
         val bottomNavView: BottomNavigationView = binding.bottomNavigation
         val navHostFragment = supportFragmentManager
@@ -200,6 +210,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun attachBaseContext(newBase: Context) {
         super.attachBaseContext(MyContextWrapper.wrap(newBase, "ar"))
+    }
+
+    public fun getMainData(): ArrayList<DuaEvidence> {
+        return mDuaEvidenceList
     }
 }
 

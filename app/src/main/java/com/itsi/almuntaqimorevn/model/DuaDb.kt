@@ -37,12 +37,12 @@ class DuaDb {
 
         for (i in 0 until duaArray.length()) {
             val oneDuaObj = duaArray.getJSONObject(i)
-            Log.i("ID: ", oneDuaObj.toString())
+            //Log.i("ID: ", oneDuaObj.toString())
             var quranic = false
             try {
                 quranic = oneDuaObj.getBoolean("quranic")
             } catch (e:Exception) {
-
+                e.printStackTrace()
             }
 
             var duaEvidence = DuaEvidence(oneDuaObj.getInt("id"), oneDuaObj.getString("dua"),
@@ -66,7 +66,7 @@ class DuaDb {
 
         for (i in 0 until duaArray.length()) {
             val oneDuaObj = duaArray.getJSONObject(i)
-            Log.i("ID: ", oneDuaObj.toString())
+            //Log.i("ID: ", oneDuaObj.toString())
             var quranic = false
             try {
                 quranic = oneDuaObj.getBoolean("quranic")
