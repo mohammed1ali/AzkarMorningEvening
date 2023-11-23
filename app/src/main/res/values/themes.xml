@@ -17,7 +17,7 @@
     <style name="Theme.CustomSplashScreenTheme" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/white</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_240_80</item>
-        <item name="windowSplashScreenAnimationDuration">3000</item>
+        <item name="windowSplashScreenAnimationDuration">300</item>
         <!--<item name="postSplashScreenTheme">@style/Theme.AsSahihAlMuntaqi</item>-->
         <item name="postSplashScreenTheme">@style/Theme.SplashActivityTheme</item>
     </style>
@@ -25,6 +25,7 @@
     <style name="Theme.SplashActivityTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:fontFamily">@font/uthman_taha_naskh_regular</item>
         <item name="fontFamily">@font/uthman_taha_naskh_regular</item>
+        <!--<item name="android:windowDisablePreview">true</item>-->
     </style>
 
 </resources>

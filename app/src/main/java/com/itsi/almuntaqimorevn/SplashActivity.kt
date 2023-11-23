@@ -61,7 +61,7 @@ class SplashActivity : AppCompatActivity() {
             // on the below line we are finishing
             // our current activity.
             finish()
-        }, 7700)
+        }, 1000)
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {

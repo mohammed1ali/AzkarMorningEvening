@@ -10,12 +10,12 @@
     tools:context=".SecondFragment">
     <!--android:layout_marginBottom="?actionBarSize"-->
 
-    <LinearLayout
+    <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+
+        >-->
 
         <!--<TextView
             android:layout_width="match_parent"
@@ -30,9 +30,10 @@
             android:id="@+id/recyclerview_dua_evd"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/card_view_dua_evd" />
 
-    </LinearLayout>
+    <!--</LinearLayout>-->
 
     <!--<androidx.cardview.widget.CardView
         android:layout_width="match_parent"

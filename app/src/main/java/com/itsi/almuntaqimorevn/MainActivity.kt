@@ -30,6 +30,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import com.itsi.almuntaqimorevn.databinding.ActivityMainBinding
 import com.itsi.almuntaqimorevn.model.DuaDb
 import com.itsi.almuntaqimorevn.model.DuaEvidence
@@ -45,6 +48,7 @@ import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var analytics: FirebaseAnalytics
     private lateinit var mDuaEvidenceList: ArrayList<DuaEvidence>
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
@@ -69,6 +73,9 @@ class MainActivity : AppCompatActivity() {
             supportActionBar?.title = item
             // Update the UI using new item data
         })
+
+        // Obtain the FirebaseAnalytics instance.
+        analytics = Firebase.analytics
 
 
         when (resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
