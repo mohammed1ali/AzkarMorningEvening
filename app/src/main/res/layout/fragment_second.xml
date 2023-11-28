@@ -30,6 +30,8 @@
             android:id="@+id/recyclerview_dua_evd"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            android:scrollbarThumbVertical="@drawable/scrollbar_primary"
             app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/card_view_dua_evd" />
 

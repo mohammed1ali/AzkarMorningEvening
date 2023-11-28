@@ -115,8 +115,8 @@ class DuaEvdAdapter(private val mDuaEvdList: ArrayList<DuaEvidence>,
 
                 if(mBookmarksList?.contains(position+1) == true) {
                     BkmUtils().removeBookmark(position+1, it.context)
-                    Toast.makeText(it.context, it.context.getString(R.string.bookmark_removed),
-                        Toast.LENGTH_SHORT).show()
+                    /*Toast.makeText(it.context, it.context.getString(R.string.bookmark_removed),
+                        Toast.LENGTH_SHORT).show()*/
                     mBookmarksList = BkmUtils().getAllBookmarks(it.context)
                 } else {
                     BkmUtils().saveBookmark(position + 1, it.context)

@@ -116,8 +116,8 @@ class BookmarksAdapter(private var mBookmarkedDuaEvdList: ArrayList<DuaEvidence>
                 bt.dismiss()
 
                 BkmUtils().removeBookmark(oneDuaEvd.mId, it.context)
-                Toast.makeText(it.context, it.context.getString(R.string.bookmark_removed),
-                    Toast.LENGTH_SHORT).show()
+                /*Toast.makeText(it.context, it.context.getString(R.string.bookmark_removed),
+                    Toast.LENGTH_SHORT).show()*/
                 val bookmarksList = BkmUtils().getAllBookmarks(it.context)
                 mBookmarkedDuaEvdList = DuaDb().getBookmarkedDuaEvd(bookmarksList)
                 notifyItemRemoved(position)
